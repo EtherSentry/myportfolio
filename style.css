@@ -1,0 +1,90 @@
+/* --- CONFIGURACIÓN GLOBAL (Aplica a toda la web) --- */
+body {
+    background-color: #0f0f16; /* Tu fondo negro azulado */
+    color: #f8f8f2; /* Texto blanco hueso */
+    font-family: 'Courier New', monospace; /* Fuente Hacker */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* --- BARRA DE NAVEGACIÓN (El menú superior) --- */
+.cyber-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(15, 15, 22, 0.95); /* Fondo semitransparente */
+    padding: 20px 40px;
+    border-bottom: 2px solid #bd93f9; /* Línea morada */
+    position: sticky; /* Se pega al techo */
+    top: 0;
+    z-index: 9999; /* Siempre encima */
+    backdrop-filter: blur(5px); /* Efecto cristal */
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f8f8f2;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    color: #8be9fd; /* Azul Cian */
+    font-weight: bold;
+    font-size: 1rem;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+}
+
+/* Efectos al pasar el mouse por el menú */
+.nav-links li a:hover {
+    color: #50fa7b; /* Verde neón */
+    text-shadow: 0 0 8px rgba(80, 250, 123, 0.6);
+}
+
+/* Indicador de "Página Actual" */
+.nav-links li a.active {
+    color: #50fa7b;
+    border-bottom: 2px solid #50fa7b;
+}
+
+/* --- BOTONES GENERALES --- */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #bd93f9;
+    color: #bd93f9;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #bd93f9;
+    color: #0f0f16;
+    box-shadow: 0 0 15px #bd93f9;
+}
+
+/* --- PIE DE PÁGINA (Footer) --- */
+footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #44475a;
+    color: #6272a4;
+    font-size: 0.9rem;
+    margin-top: 50px;
+}
