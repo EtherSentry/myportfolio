@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EtherSentry | Galería Profesional</title>
+    <title>EtherSentry | Galería Visual</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> 
-    
+
     <style>
-        /* --- 1. AJUSTE DE TAMAÑO (ESCALA) --- */
+        /* --- 1. BASE: FUENTES GIGANTES PARA IGUALAR LA MAIN --- */
         body {
             background-color: #0f0f16;
             color: #f8f8f2;
             font-family: 'VT323', monospace; 
-            font-size: 1.5rem; /* Aumentado de 1.2 a 1.5 para que no se vea chico */
+            font-size: 1.5rem; /* Tamaño base aumentado */
             margin: 0;
             padding: 0;
             overflow-x: hidden;
@@ -23,107 +23,124 @@
 
         a { text-decoration: none; transition: all 0.3s ease; }
 
-        /* --- 2. BARRA DE NAVEGACIÓN (MÁS GRANDE Y BRILLANTE) --- */
+        /* --- 2. BARRA DE NAVEGACIÓN (CLONADA DE MAIN) --- */
         .cyber-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: rgba(15, 15, 22, 0.95);
-            padding: 25px 50px; /* Más padding para que la barra sea más alta */
-            border-bottom: 2px solid #bd93f9;
+            background-color: rgba(15, 15, 22, 0.98);
+            padding: 20px 50px; /* Más altura */
+            border-bottom: 3px solid #bd93f9; /* Línea más gruesa */
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5); /* Sombra debajo de la barra */
         }
 
+        /* EL LOGO CON GLOW VERDE */
         .nav-logo {
-            font-size: 2.2rem; /* Logo mucho más grande */
-            font-weight: 400; /* Las fuentes pixel no necesitan negrita */
+            font-size: 2.5rem; /* MUCHO MÁS GRANDE */
+            font-weight: 400; 
             color: #f8f8f2;
             letter-spacing: 2px;
-            /* EL RESALTADO VERDE (GLOW) */
-            text-shadow: 0 0 10px rgba(80, 250, 123, 0.7); 
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            /* El truco del brillo verde en el texto blanco */
+            text-shadow: 0 0 10px rgba(80, 250, 123, 0.6); 
+        }
+
+        .arrow-icon {
+            color: #50fa7b;
+            text-shadow: 0 0 15px #50fa7b; /* La flecha brilla más */
+            font-size: 2.5rem;
         }
 
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 40px; /* Más espacio entre botones */
+            gap: 40px;
             margin: 0;
             padding: 0;
         }
 
         .nav-links li a {
             color: #8be9fd;
-            font-size: 1.4rem; /* Enlaces más grandes */
-            padding-bottom: 5px;
-            border-bottom: 2px solid transparent;
+            font-size: 1.5rem; /* Enlaces grandes */
+            padding: 5px 0;
+            border-bottom: 3px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .nav-links li a:hover {
             color: #50fa7b;
-            text-shadow: 0 0 15px #50fa7b; /* Brillo fuerte al pasar mouse */
+            text-shadow: 0 0 15px #50fa7b;
         }
 
         .nav-links li a.active {
             color: #50fa7b;
-            border-bottom: 2px solid #50fa7b;
-            text-shadow: 0 0 10px rgba(80, 250, 123, 0.5);
+            border-bottom: 3px solid #50fa7b;
+            text-shadow: 0 0 10px rgba(80, 250, 123, 0.4);
         }
 
-        /* --- 3. ENCABEZADO DE GALERÍA (MÁS IMPONENTE) --- */
+        /* --- 3. ENCABEZADO DE GALERÍA (ESTILO PORTADA) --- */
         .gallery-header {
             text-align: center;
-            padding: 80px 20px 50px; /* Más espacio arriba */
+            padding: 60px 20px 40px;
+            border-bottom: 1px dashed #44475a; /* Separador sutil */
+            margin-bottom: 40px;
         }
 
         .gallery-header h1 {
             color: #8be9fd;
-            font-size: 4rem; /* Título gigante estilo portada */
-            margin-bottom: 10px;
+            font-size: 4.5rem; /* TÍTULO GIGANTE */
+            margin: 0;
             text-transform: uppercase;
             letter-spacing: 5px;
-            text-shadow: 0 0 20px rgba(139, 233, 253, 0.4);
-            font-weight: 400;
+            text-shadow: 0 0 20px rgba(139, 233, 253, 0.5);
+            line-height: 1;
         }
 
         .gallery-header p { 
             color: #bd93f9; 
-            font-size: 1.5rem; /* Subtítulo legible */
+            font-size: 1.8rem; /* Subtítulo grande */
+            margin-top: 15px;
+            text-shadow: 0 0 5px rgba(189, 147, 249, 0.5);
         }
 
         /* --- 4. GRILLA DE FOTOS --- */
         .gallery-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 50px; /* Más separación entre fotos */
-            padding: 20px 80px 150px;
-            max-width: 1600px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Tarjetas más anchas */
+            gap: 40px;
+            padding: 0 80px 100px;
+            max-width: 1800px;
             margin: 0 auto;
         }
 
         .photo-card {
-            background-color: #1a1a24;
-            border: 1px solid #44475a;
-            border-radius: 4px;
+            background-color: #15151e;
+            border: 2px solid #44475a; /* Borde más visible */
+            border-radius: 0; /* Bordes cuadrados estilo Pixel/Retro */
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease; /* Transición rápida "digital" */
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
 
         .photo-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             border-color: #50fa7b;
-            box-shadow: 0 0 25px rgba(80, 250, 123, 0.3); /* Resplandor verde en la tarjeta */
+            box-shadow: 0 0 30px rgba(80, 250, 123, 0.2); /* Glow verde al hover */
         }
 
         .img-wrapper {
             width: 100%;
-            height: 300px; /* Fotos más altas */
+            height: 320px; /* Fotos altas */
             overflow: hidden;
-            border-bottom: 1px solid #282a36;
+            border-bottom: 2px solid #282a36;
         }
 
         .photo-card img {
@@ -131,14 +148,31 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
-            opacity: 0.9;
+            opacity: 0.85;
+            filter: grayscale(20%); /* Un toque desaturado estilo ingeniero */
         }
 
-        .photo-card:hover img { transform: scale(1.1); opacity: 1; }
+        .photo-card:hover img { 
+            transform: scale(1.05); 
+            opacity: 1; 
+            filter: grayscale(0%);
+        }
 
         .card-info { padding: 20px; }
-        .card-title { display: block; color: #f8f8f2; font-size: 1.6rem; margin-bottom: 5px; }
-        .card-tech { display: block; color: #6272a4; font-size: 1.1rem; }
+        
+        .card-title { 
+            display: block; 
+            color: #f8f8f2; 
+            font-size: 2rem; /* Título foto grande */
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .card-tech { 
+            display: block; 
+            color: #6272a4; 
+            font-size: 1.3rem; 
+        }
 
         /* --- 5. MODAL --- */
         .modal {
@@ -153,14 +187,14 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
             max-width: 90%;
             max-height: 80vh;
-            border: 2px solid #50fa7b;
-            box-shadow: 0 0 60px rgba(80, 250, 123, 0.15);
+            border: 3px solid #50fa7b;
+            box-shadow: 0 0 80px rgba(80, 250, 123, 0.2);
         }
 
         .close-btn {
@@ -168,18 +202,20 @@
             top: 30px;
             right: 50px;
             color: #fff;
-            font-size: 60px;
+            font-size: 80px; /* X gigante */
             font-weight: bold;
+            line-height: 0.5;
             cursor: pointer;
         }
         
         .modal-caption {
-            margin-top: 25px;
+            margin-top: 30px;
             color: #f8f8f2;
             background: #282a36;
             padding: 15px 30px;
-            border-left: 5px solid #bd93f9;
-            font-size: 1.5rem;
+            border-left: 6px solid #bd93f9;
+            font-size: 1.8rem;
+            text-shadow: 0 0 5px rgba(255,255,255,0.3);
         }
     </style>
 </head>
@@ -187,11 +223,12 @@
 
     <nav class="cyber-nav">
         <div class="nav-logo">
-            <span style="color: #50fa7b;">➜</span> ETHER_SENTRY
+            <span class="arrow-icon">➜</span> ETHER_SENTRY
         </div>
         <ul class="nav-links">
             <li><a href="index.html">/ROOT</a></li>
-            <li><a href="galeria.html" class="active">/GALERÍA</a></li> <li><a href="index.html#proyectos">/PROYECTOS</a></li>
+            <li><a href="galeria.html" class="active">/GALERÍA</a></li>
+            <li><a href="index.html#proyectos">/PROYECTOS</a></li>
             <li><a href="mailto:tuemail@gmail.com">/CONTACTO</a></li>
         </ul>
     </nav>
@@ -203,37 +240,31 @@
 
     <div class="gallery-container">
         
-        <div class="photo-card" onclick="openModal(this)" data-desc="Mega Charizard X - Iluminación de Estudio">
-            <div class="img-wrapper">
-                <img src="charizard.jpg" alt="Charizard UPC">
-            </div>
+        <div class="photo-card" onclick="openModal(this)" data-desc="Mega Charizard X UPC">
+            <div class="img-wrapper"><img src="charizard.jpg" alt="Charizard"></div>
             <div class="card-info">
                 <span class="card-title">Mega Charizard X</span>
                 <span class="card-tech">Canon Rebel T5 | 50mm | ISO 100</span>
             </div>
         </div>
 
-        <div class="photo-card" onclick="openModal(this)" data-desc="Kyurem Black - Render de Terminal">
-            <div class="img-wrapper">
-                <img src="kyurem.png" alt="Kyurem">
-            </div>
+        <div class="photo-card" onclick="openModal(this)" data-desc="Kyurem Digital Asset">
+            <div class="img-wrapper"><img src="kyurem.png" alt="Kyurem"></div>
             <div class="card-info">
                 <span class="card-title">Project Kyurem</span>
-                <span class="card-tech">Digital Asset | High Contrast</span>
+                <span class="card-tech">Digital Render | High Contrast</span>
             </div>
         </div>
 
-        <div class="photo-card" onclick="openModal(this)" data-desc="Estación de Trabajo Garuda Linux">
-            <div class="img-wrapper">
-                <img src="setup.jpg" alt="Setup">
-            </div>
+        <div class="photo-card" onclick="openModal(this)" data-desc="Workstation Setup">
+            <div class="img-wrapper"><img src="setup.jpg" alt="Setup"></div>
             <div class="card-info">
-                <span class="card-title">Workstation</span>
+                <span class="card-title">EtherSentry Station</span>
                 <span class="card-tech">Garuda Linux | Dr460nized</span>
             </div>
         </div>
 
-        </div>
+    </div>
 
     <div id="myModal" class="modal">
         <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -244,28 +275,23 @@
     <script>
         function openModal(card) {
             const modal = document.getElementById("myModal");
-            const modalImg = document.getElementById("img01");
-            const captionText = document.getElementById("caption");
-            
             const img = card.querySelector('img');
             const desc = card.getAttribute('data-desc');
-
+            
+            document.getElementById("img01").src = img.src;
+            document.getElementById("caption").innerHTML = "► SYSTEM LOG: " + desc;
             modal.style.display = "flex";
-            modalImg.src = img.src;
-            captionText.innerHTML = "► SYSTEM LOG: " + desc;
         }
-
         function closeModal() {
             document.getElementById("myModal").style.display = "none";
         }
-        
-        window.onclick = function(event) {
-            const modal = document.getElementById("myModal");
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+        window.onclick = function(e) {
+            if (e.target == document.getElementById("myModal")) closeModal();
         }
     </script>
+
+</body>
+</html>
 
 </body>
 </html>
