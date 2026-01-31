@@ -10,114 +10,120 @@
     <link rel="stylesheet" href="style.css"> 
     
     <style>
-        /* --- 1. ESTÉTICA GENERAL (FONDO OSCURO) --- */
+        /* --- 1. AJUSTE DE TAMAÑO (ESCALA) --- */
         body {
-            background-color: #0f0f16; /* Negro azulado profundo */
+            background-color: #0f0f16;
             color: #f8f8f2;
-            font-family: 'VT323', monospace;
-            font-size: 1.2rem; /* Aumentamos un poco porque esta letra es más pequeña */
+            font-family: 'VT323', monospace; 
+            font-size: 1.5rem; /* Aumentado de 1.2 a 1.5 para que no se vea chico */
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
 
-        /* --- 2. BARRA DE NAVEGACIÓN SUPERIOR (MENU) --- */
+        a { text-decoration: none; transition: all 0.3s ease; }
+
+        /* --- 2. BARRA DE NAVEGACIÓN (MÁS GRANDE Y BRILLANTE) --- */
         .cyber-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: rgba(15, 15, 22, 0.95); /* Fondo oscuro semitransparente */
-            padding: 15px 40px;
-            border-bottom: 1px solid #bd93f9; /* Línea morada sutil */
-            position: sticky; /* Se queda pegada arriba al bajar */
+            background-color: rgba(15, 15, 22, 0.95);
+            padding: 25px 50px; /* Más padding para que la barra sea más alta */
+            border-bottom: 2px solid #bd93f9;
+            position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(5px); /* Efecto cristal */
+            backdrop-filter: blur(5px);
         }
 
         .nav-logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 2.2rem; /* Logo mucho más grande */
+            font-weight: 400; /* Las fuentes pixel no necesitan negrita */
             color: #f8f8f2;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            /* EL RESALTADO VERDE (GLOW) */
+            text-shadow: 0 0 10px rgba(80, 250, 123, 0.7); 
         }
 
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 25px;
+            gap: 40px; /* Más espacio entre botones */
             margin: 0;
             padding: 0;
         }
 
         .nav-links li a {
-            text-decoration: none;
-            color: #6272a4; /* Gris azulado (Inactivo) */
-            font-weight: bold;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+            color: #8be9fd;
+            font-size: 1.4rem; /* Enlaces más grandes */
             padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
         }
 
-        /* Efecto Hover y Activo */
-        .nav-links li a:hover, 
+        .nav-links li a:hover {
+            color: #50fa7b;
+            text-shadow: 0 0 15px #50fa7b; /* Brillo fuerte al pasar mouse */
+        }
+
         .nav-links li a.active {
-            color: #50fa7b; /* Verde neón */
+            color: #50fa7b;
             border-bottom: 2px solid #50fa7b;
-            text-shadow: 0 0 8px rgba(80, 250, 123, 0.4);
+            text-shadow: 0 0 10px rgba(80, 250, 123, 0.5);
         }
 
-        /* --- 3. ENCABEZADO DE LA GALERÍA --- */
+        /* --- 3. ENCABEZADO DE GALERÍA (MÁS IMPONENTE) --- */
         .gallery-header {
             text-align: center;
-            padding: 60px 20px 30px;
+            padding: 80px 20px 50px; /* Más espacio arriba */
         }
 
         .gallery-header h1 {
-            color: #8be9fd; /* Azul Cian */
-            font-size: 2.5rem;
+            color: #8be9fd;
+            font-size: 4rem; /* Título gigante estilo portada */
             margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px rgba(139, 233, 253, 0.3);
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px rgba(139, 233, 253, 0.4);
+            font-weight: 400;
         }
 
-        .gallery-header p {
-            color: #bd93f9;
-            font-size: 1rem;
+        .gallery-header p { 
+            color: #bd93f9; 
+            font-size: 1.5rem; /* Subtítulo legible */
         }
 
-        /* --- 4. GRILLA DE TARJETAS (GRID) --- */
+        /* --- 4. GRILLA DE FOTOS --- */
         .gallery-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 20px 60px 80px; /* Margen inferior amplio */
-            max-width: 1400px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px; /* Más separación entre fotos */
+            padding: 20px 80px 150px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
         .photo-card {
             background-color: #1a1a24;
             border: 1px solid #44475a;
-            border-radius: 8px;
+            border-radius: 4px;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
         .photo-card:hover {
-            transform: translateY(-5px);
-            border-color: #50fa7b; /* Borde verde al pasar mouse */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transform: translateY(-8px);
+            border-color: #50fa7b;
+            box-shadow: 0 0 25px rgba(80, 250, 123, 0.3); /* Resplandor verde en la tarjeta */
         }
 
-        /* Contenedor de imagen (Corte perfecto) */
         .img-wrapper {
             width: 100%;
-            height: 250px;
+            height: 300px; /* Fotos más altas */
             overflow: hidden;
+            border-bottom: 1px solid #282a36;
         }
 
         .photo-card img {
@@ -128,32 +134,13 @@
             opacity: 0.9;
         }
 
-        .photo-card:hover img {
-            transform: scale(1.1);
-            opacity: 1;
-        }
+        .photo-card:hover img { transform: scale(1.1); opacity: 1; }
 
-        /* Información de la tarjeta */
-        .card-info {
-            padding: 15px;
-            border-top: 1px solid #282a36;
-        }
+        .card-info { padding: 20px; }
+        .card-title { display: block; color: #f8f8f2; font-size: 1.6rem; margin-bottom: 5px; }
+        .card-tech { display: block; color: #6272a4; font-size: 1.1rem; }
 
-        .card-title {
-            display: block;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #f8f8f2;
-            margin-bottom: 5px;
-        }
-
-        .card-tech {
-            display: block;
-            font-size: 0.8rem;
-            color: #6272a4; /* Texto técnico gris */
-        }
-
-        /* --- 5. MODAL (VISOR DE FOTOS) --- */
+        /* --- 5. MODAL --- */
         .modal {
             display: none;
             position: fixed;
@@ -166,38 +153,33 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
 
         .modal-content {
             max-width: 90%;
             max-height: 80vh;
             border: 2px solid #50fa7b;
-            box-shadow: 0 0 40px rgba(80, 250, 123, 0.1);
-            border-radius: 4px;
+            box-shadow: 0 0 60px rgba(80, 250, 123, 0.15);
         }
 
         .close-btn {
             position: absolute;
-            top: 20px;
-            right: 40px;
+            top: 30px;
+            right: 50px;
             color: #fff;
-            font-size: 50px;
+            font-size: 60px;
             font-weight: bold;
             cursor: pointer;
-            transition: color 0.3s;
         }
         
-        .close-btn:hover { color: #ff5555; }
-
         .modal-caption {
-            margin-top: 20px;
+            margin-top: 25px;
             color: #f8f8f2;
-            font-size: 1.1rem;
             background: #282a36;
-            padding: 10px 20px;
-            border-radius: 4px;
-            border-left: 4px solid #bd93f9;
+            padding: 15px 30px;
+            border-left: 5px solid #bd93f9;
+            font-size: 1.5rem;
         }
     </style>
 </head>
