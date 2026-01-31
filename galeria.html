@@ -3,219 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EtherSentry | Galería Visual</title>
-    
+    <title>EtherSentry | Visual Log</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-
+    
     <style>
-        /* --- 1. BASE: FUENTES GIGANTES PARA IGUALAR LA MAIN --- */
+        /* --- TUS VARIABLES & PALETA ORIGINALES --- */
+        :root {
+            --bg-dark: #0f0f16;
+            --bg-panel: #191924;
+            --retro-purple: #bd93f9; 
+            --retro-green: #50fa7b;  
+            --retro-blue: #8be9fd;   
+            --text-main: #f8f8f2;
+            --text-dim: #6272a4;
+            --font-pixel: 'VT323', monospace; 
+            --font-body: system-ui, -apple-system, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            background-color: #0f0f16;
-            color: #f8f8f2;
-            font-family: 'VT323', monospace; 
-            font-size: 1.5rem; /* Tamaño base aumentado */
-            margin: 0;
-            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
 
-        a { text-decoration: none; transition: all 0.3s ease; }
+        /* --- EFECTO CRT (SCANLINES) --- */
+        body::before {
+            content: " "; display: block; position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 9999; background-size: 100% 3px, 3px 100%; pointer-events: none;
+        }
 
-        /* --- 2. BARRA DE NAVEGACIÓN (CLONADA DE MAIN) --- */
+        h1, h2, h3, .pixel-font { font-family: var(--font-pixel); letter-spacing: 1px; }
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+        ul { list-style: none; }
+
+        .container { max-width: 1200px; /* Un poco más ancho para galería */ margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+
+        /* --- TU BARRA DE NAVEGACIÓN --- */
         .cyber-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: rgba(15, 15, 22, 0.98);
-            padding: 20px 50px; /* Más altura */
-            border-bottom: 3px solid #bd93f9; /* Línea más gruesa */
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5); /* Sombra debajo de la barra */
-        }
-
-        /* EL LOGO CON GLOW VERDE */
-        .nav-logo {
-            font-size: 2.5rem; /* MUCHO MÁS GRANDE */
-            font-weight: 400; 
-            color: #f8f8f2;
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            /* El truco del brillo verde en el texto blanco */
-            text-shadow: 0 0 10px rgba(80, 250, 123, 0.6); 
-        }
-
-        .arrow-icon {
-            color: #50fa7b;
-            text-shadow: 0 0 15px #50fa7b; /* La flecha brilla más */
-            font-size: 2.5rem;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 40px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links li a {
-            color: #8be9fd;
-            font-size: 1.5rem; /* Enlaces grandes */
-            padding: 5px 0;
-            border-bottom: 3px solid transparent;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .nav-links li a:hover {
-            color: #50fa7b;
-            text-shadow: 0 0 15px #50fa7b;
-        }
-
-        .nav-links li a.active {
-            color: #50fa7b;
-            border-bottom: 3px solid #50fa7b;
-            text-shadow: 0 0 10px rgba(80, 250, 123, 0.4);
-        }
-
-        /* --- 3. ENCABEZADO DE GALERÍA (ESTILO PORTADA) --- */
-        .gallery-header {
-            text-align: center;
-            padding: 60px 20px 40px;
-            border-bottom: 1px dashed #44475a; /* Separador sutil */
-            margin-bottom: 40px;
-        }
-
-        .gallery-header h1 {
-            color: #8be9fd;
-            font-size: 4.5rem; /* TÍTULO GIGANTE */
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            text-shadow: 0 0 20px rgba(139, 233, 253, 0.5);
-            line-height: 1;
-        }
-
-        .gallery-header p { 
-            color: #bd93f9; 
-            font-size: 1.8rem; /* Subtítulo grande */
-            margin-top: 15px;
-            text-shadow: 0 0 5px rgba(189, 147, 249, 0.5);
-        }
-
-        /* --- 4. GRILLA DE FOTOS --- */
-        .gallery-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Tarjetas más anchas */
-            gap: 40px;
-            padding: 0 80px 100px;
-            max-width: 1800px;
-            margin: 0 auto;
-        }
-
-        .photo-card {
-            background-color: #15151e;
-            border: 2px solid #44475a; /* Borde más visible */
-            border-radius: 0; /* Bordes cuadrados estilo Pixel/Retro */
-            overflow: hidden;
-            transition: all 0.2s ease; /* Transición rápida "digital" */
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
-
-        .photo-card:hover {
-            transform: translateY(-5px);
-            border-color: #50fa7b;
-            box-shadow: 0 0 30px rgba(80, 250, 123, 0.2); /* Glow verde al hover */
-        }
-
-        .img-wrapper {
-            width: 100%;
-            height: 320px; /* Fotos altas */
-            overflow: hidden;
-            border-bottom: 2px solid #282a36;
-        }
-
-        .photo-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-            opacity: 0.85;
-            filter: grayscale(20%); /* Un toque desaturado estilo ingeniero */
-        }
-
-        .photo-card:hover img { 
-            transform: scale(1.05); 
-            opacity: 1; 
-            filter: grayscale(0%);
-        }
-
-        .card-info { padding: 20px; }
-        
-        .card-title { 
-            display: block; 
-            color: #f8f8f2; 
-            font-size: 2rem; /* Título foto grande */
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-        
-        .card-tech { 
-            display: block; 
-            color: #6272a4; 
-            font-size: 1.3rem; 
-        }
-
-        /* --- 5. MODAL --- */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(15, 15, 22, 0.98);
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            display: flex; justify-content: space-between; align-items: center;
+            background-color: rgba(15, 15, 22, 0.95);
+            padding: 15px 30px;
+            border-bottom: 2px solid #bd93f9;
+            position: sticky; top: 0; z-index: 1000;
             backdrop-filter: blur(5px);
         }
 
-        .modal-content {
-            max-width: 90%;
-            max-height: 80vh;
-            border: 3px solid #50fa7b;
-            box-shadow: 0 0 80px rgba(80, 250, 123, 0.2);
+        .nav-logo {
+            font-family: 'Courier New', monospace; font-weight: bold; font-size: 1.5rem;
+            color: #f8f8f2; text-shadow: 0 0 5px #50fa7b;
         }
 
-        .close-btn {
-            position: absolute;
-            top: 30px;
-            right: 50px;
-            color: #fff;
-            font-size: 80px; /* X gigante */
-            font-weight: bold;
-            line-height: 0.5;
-            cursor: pointer;
+        .nav-links { list-style: none; display: flex; gap: 20px; margin: 0; padding: 0; }
+
+        .nav-links li a {
+            text-decoration: none; color: #8be9fd;
+            font-family: 'Courier New', monospace; font-weight: bold;
+            transition: all 0.3s ease; padding: 5px 10px; border: 1px solid transparent;
         }
-        
+
+        .nav-links li a:hover {
+            color: #50fa7b; border: 1px solid #50fa7b;
+            box-shadow: 0 0 10px #50fa7b; background-color: rgba(80, 250, 123, 0.1);
+        }
+
+        .nav-links li a.active { color: #bd93f9; border-bottom: 2px solid #bd93f9; }
+
+        /* --- TUS CLASES DE TARJETAS (REUTILIZADAS) --- */
+        .section-title { 
+            font-size: 2.5rem; margin-bottom: 40px; color: var(--retro-blue); 
+            border-bottom: 4px solid var(--retro-purple); display: inline-block; margin-top: 40px;
+        }
+
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+
+        .pixel-card {
+            background: var(--bg-panel); border: 2px solid #333; transition: 0.3s;
+            position: relative; overflow: hidden; cursor: pointer;
+        }
+        .pixel-card:hover {
+            border-color: var(--retro-green); transform: translateY(-5px);
+            box-shadow: 8px 8px 0px rgba(80, 250, 123, 0.2);
+        }
+
+        .card-img-container {
+            width: 100%; height: 250px; /* Altura fija para fotos */
+            background: #000; border-bottom: 2px solid #333;
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .card-img-container img {
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;
+        }
+        .pixel-card:hover .card-img-container img { transform: scale(1.1); }
+
+        .card-content { padding: 20px; }
+        .tag { 
+            background: var(--retro-purple); color: #000; 
+            font-family: var(--font-pixel); padding: 2px 8px; font-size: 0.9rem;
+            display: inline-block; margin-bottom: 10px;
+        }
+
+        /* --- ESTILOS EXTRA SOLO PARA EL MODAL (Necesario para ver fotos en grande) --- */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(15, 15, 22, 0.98);
+            justify-content: center; align-items: center; flex-direction: column;
+        }
+        .modal-content {
+            max-width: 90%; max-height: 80vh;
+            border: 2px solid var(--retro-green);
+            box-shadow: 0 0 20px rgba(80, 250, 123, 0.2);
+        }
+        .close-btn {
+            position: absolute; top: 30px; right: 40px; color: var(--text-main);
+            font-family: var(--font-pixel); font-size: 3rem; cursor: pointer;
+        }
         .modal-caption {
-            margin-top: 30px;
-            color: #f8f8f2;
-            background: #282a36;
-            padding: 15px 30px;
-            border-left: 6px solid #bd93f9;
-            font-size: 1.8rem;
-            text-shadow: 0 0 5px rgba(255,255,255,0.3);
+            margin-top: 20px; color: var(--text-main); font-family: var(--font-pixel); font-size: 1.5rem;
+            background: var(--bg-panel); padding: 10px 20px; border-left: 4px solid var(--retro-purple);
         }
     </style>
 </head>
@@ -223,51 +136,67 @@
 
     <nav class="cyber-nav">
         <div class="nav-logo">
-            <span class="arrow-icon">➜</span> ETHER_SENTRY
+            <span style="color: #50fa7b;">➜</span> ETHER_SENTRY
         </div>
         <ul class="nav-links">
             <li><a href="index.html">/ROOT</a></li>
-            <li><a href="galeria.html" class="active">/GALERÍA</a></li>
-            <li><a href="index.html#proyectos">/PROYECTOS</a></li>
+            <li><a href="galeria.html" class="active">/GALERÍA</a></li> <li><a href="index.html#proyectos">/PROYECTOS</a></li>
             <li><a href="mailto:tuemail@gmail.com">/CONTACTO</a></li>
         </ul>
     </nav>
 
-    <header class="gallery-header">
-        <h1>Registros Visuales</h1>
-        <p>[ Fotografía de Producto / Ingeniería / Coleccionismo ]</p>
-    </header>
-
-    <div class="gallery-container">
+    <div class="container">
         
-        <div class="photo-card" onclick="openModal(this)" data-desc="Mega Charizard X UPC">
-            <div class="img-wrapper"><img src="charizard.jpg" alt="Charizard"></div>
-            <div class="card-info">
-                <span class="card-title">Mega Charizard X</span>
-                <span class="card-tech">Canon Rebel T5 | 50mm | ISO 100</span>
-            </div>
-        </div>
+        <header style="border-bottom: 2px dashed var(--retro-purple); padding: 40px 0; text-align: center; display: block;">
+            <div class="logo pixel-font" style="font-size: 3rem;">VISUAL_DATABASE</div>
+            <div class="pixel-font" style="color: var(--text-dim);">[ SYSTEM LOGS: PHOTO & RENDER ]</div>
+        </header>
 
-        <div class="photo-card" onclick="openModal(this)" data-desc="Kyurem Digital Asset">
-            <div class="img-wrapper"><img src="kyurem.png" alt="Kyurem"></div>
-            <div class="card-info">
-                <span class="card-title">Project Kyurem</span>
-                <span class="card-tech">Digital Render | High Contrast</span>
-            </div>
-        </div>
+        <section style="margin-top: 40px;">
+            <h2 class="section-title pixel-font">ARCHIVOS DE IMAGEN</h2>
 
-        <div class="photo-card" onclick="openModal(this)" data-desc="Workstation Setup">
-            <div class="img-wrapper"><img src="setup.jpg" alt="Setup"></div>
-            <div class="card-info">
-                <span class="card-title">EtherSentry Station</span>
-                <span class="card-tech">Garuda Linux | Dr460nized</span>
-            </div>
-        </div>
+            <div class="project-grid">
+                
+                <article class="pixel-card" onclick="openModal(this)" data-desc="Luffy Gear 5 - Iluminación Neón Magenta">
+                    <div class="card-img-container">
+                        <img src="luffy.jpg" alt="Luffy">
+                    </div>
+                    <div class="card-content">
+                        <span class="tag" style="background: var(--retro-blue);">FOTOGRAFÍA</span>
+                        <h3 class="pixel-font" style="font-size: 1.5rem;">Cyber Luffy</h3>
+                    </div>
+                </article>
+
+                <article class="pixel-card" onclick="openModal(this)" data-desc="Carta TCG Yu-Gi-Oh - Detalle Foil">
+                    <div class="card-img-container">
+                        <img src="cartas.jpg" alt="Cartas">
+                    </div>
+                    <div class="card-content">
+                        <span class="tag" style="background: var(--retro-green);">MACRO</span>
+                        <h3 class="pixel-font" style="font-size: 1.5rem;">TCG Eria Foil</h3>
+                    </div>
+                </article>
+
+                <article class="pixel-card" onclick="openModal(this)" data-desc="Terminal Garuda Linux con Fastfetch">
+                    <div class="card-img-container">
+                        <img src="setup.jpg" alt="Terminal"> </div>
+                    <div class="card-content">
+                        <span class="tag" style="background: var(--retro-purple);">LINUX</span>
+                        <h3 class="pixel-font" style="font-size: 1.5rem;">Workstation</h3>
+                    </div>
+                </article>
+
+                </div>
+        </section>
+
+        <footer style="margin-top: 80px; padding: 40px 0; text-align: center; border-top: 2px dashed var(--text-dim); font-family: var(--font-pixel); color: var(--text-dim);">
+            <p>END OF LOGS</p>
+        </footer>
 
     </div>
 
     <div id="myModal" class="modal">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <span class="close-btn" onclick="closeModal()">X</span>
         <img class="modal-content" id="img01">
         <div id="caption" class="modal-caption"></div>
     </div>
@@ -279,7 +208,7 @@
             const desc = card.getAttribute('data-desc');
             
             document.getElementById("img01").src = img.src;
-            document.getElementById("caption").innerHTML = "► SYSTEM LOG: " + desc;
+            document.getElementById("caption").innerHTML = "> " + desc;
             modal.style.display = "flex";
         }
         function closeModal() {
@@ -289,9 +218,6 @@
             if (e.target == document.getElementById("myModal")) closeModal();
         }
     </script>
-
-</body>
-</html>
 
 </body>
 </html>
