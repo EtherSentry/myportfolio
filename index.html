@@ -1,488 +1,483 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EtherSentry | Dev & Photo Log</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-
-    <style>
-        /* --- VARIABLES & PALETA --- */
-        :root {
-            --bg-dark: #0f0f16;
-            --bg-panel: #191924;
-            
-            /* TUS COLORES: */
-            --retro-purple: #bd93f9; /* Principal */
-            --retro-green: #50fa7b;  /* Ingeniería */
-            --retro-blue: #8be9fd;   /* Detalles */
-            
-            --text-main: #f8f8f2;
-            --text-dim: #6272a4;
-            
-            --font-pixel: 'VT323', monospace; 
-            --font-body: system-ui, -apple-system, sans-serif;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* --- EFECTO CRT (SCANLINES) --- */
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            z-index: 9999;
-            background-size: 100% 3px, 3px 100%;
-            pointer-events: none;
-        }
-
-        h1, h2, h3, .pixel-font { font-family: var(--font-pixel); letter-spacing: 1px; }
-        a { text-decoration: none; color: inherit; transition: 0.2s; }
-        ul { list-style: none; }
-
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
-
-        /* --- HEADER --- */
-        header {
-            padding: 30px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px dashed var(--text-dim);
-        }
-        .logo { font-size: 2rem; color: var(--retro-purple); text-shadow: 2px 2px 0px var(--retro-green); }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            padding: 60px 0;
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .hero h1 { 
-            font-size: 4rem; 
-            line-height: 0.9; 
-            margin-bottom: 20px; 
-            text-transform: uppercase;
-        }
-        .hero p { color: var(--text-dim); margin-bottom: 30px; font-size: 1.1rem; }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: var(--retro-purple);
-            color: var(--bg-dark);
-            font-family: var(--font-pixel);
-            font-size: 1.5rem;
-            border: none;
-            box-shadow: 4px 4px 0px var(--retro-blue);
-            cursor: pointer;
-            transition: transform 0.1s;
-        }
-        .btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0px var(--retro-blue); }
-        .btn.outline { background: transparent; border: 2px solid var(--retro-green); color: var(--retro-green); box-shadow: none; }
-        .btn.outline:hover { background: var(--retro-green); color: var(--bg-dark); }
-
-        /* --- STATS CARD & ANIMATION --- */
-        .profile-card {
-            background: var(--bg-panel);
-            padding: 25px;
-            border: 2px solid var(--text-dim);
-            position: relative;
-        }
-        .profile-card::after {
-            content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
-            border: 2px solid var(--bg-dark); pointer-events: none;
-        }
-
-        .stats-grid { margin-top: 20px; }
-        .stat-row { margin-bottom: 15px; }
-        .stat-label { display: flex; justify-content: space-between; font-family: var(--font-pixel); font-size: 1.2rem; margin-bottom: 5px; }
-        
-        .progress-container {
-            height: 15px;
-            background: #000;
-            border: 1px solid var(--text-dim);
-            padding: 2px;
-        }
-        .progress-bar {
-            height: 100%;
-            background: var(--retro-green);
-            position: relative;
-            background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
-            background-size: 20px 20px;
-        }
-
-        /* FANTASMA ANIMADO */
-        .pixel-anim-container {
-            margin-top: 20px;
-            height: 40px;
-            border-top: 2px dashed #333;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-        }
-        .pixel-sprite {
-            font-size: 24px;
-            position: absolute;
-            animation: walk 8s linear infinite;
-        }
-        @keyframes walk {
-            0% { left: -10%; transform: scaleX(1); }
-            49% { left: 100%; transform: scaleX(1); }
-            50% { left: 100%; transform: scaleX(-1); }
-            99% { left: -10%; transform: scaleX(-1); }
-            100% { left: -10%; transform: scaleX(1); }
-        }
-
-        /* --- SECCIONES GENERALES --- */
-        .section-title { 
-            font-size: 2.5rem; 
-            margin-bottom: 40px; 
-            color: var(--retro-blue); 
-            border-bottom: 4px solid var(--retro-purple);
-            display: inline-block;
-        }
-
-        /* --- TIMELINE --- */
-        .timeline { border-left: 4px solid var(--text-dim); padding-left: 30px; margin-left: 10px; }
-        .timeline-item { margin-bottom: 40px; position: relative; }
-        .timeline-dot {
-            position: absolute; left: -42px; top: 5px;
-            width: 20px; height: 20px; background: var(--retro-purple);
-            border: 4px solid var(--bg-dark);
-            box-shadow: 0 0 0 2px var(--retro-purple);
-        }
-        .role-title { font-size: 1.5rem; color: var(--text-main); font-weight: bold; }
-        .company-name { font-family: var(--font-pixel); color: var(--retro-green); font-size: 1.3rem; }
-
-        /* --- SKILLS GRID --- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .skill-list li {
-            margin-bottom: 5px;
-            color: var(--text-dim);
-            font-family: var(--font-pixel);
-            font-size: 1.2rem;
-        }
-
-        /* --- PROYECTOS --- */
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .pixel-card {
-            background: var(--bg-panel);
-            border: 2px solid #333;
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden; /* Importante para que la imagen no se salga */
-        }
-        .pixel-card:hover {
-            border-color: var(--retro-green);
-            transform: translateY(-5px);
-            box-shadow: 8px 8px 0px rgba(80, 250, 123, 0.2);
-        }
-        
-        /* Estilo para las imágenes dentro de las cartas */
-        .card-img-container {
-            width: 100%;
-            height: 200px;
-            background: #000;
-            border-bottom: 2px solid #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .card-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Recorta la imagen para que llene el espacio */
-            transition: transform 0.5s;
-        }
-        .pixel-card:hover .card-img-container img {
-            transform: scale(1.1); /* Zoom suave al pasar el mouse */
-        }
-
-        /* Placeholder de texto si no hay imagen */
-        .card-placeholder {
-            font-family: var(--font-pixel);
-            font-size: 3rem;
-            color: #333;
-        }
-
-        .card-content { padding: 20px; }
-        .tag { 
-            background: var(--retro-purple); color: #000; 
-            font-family: var(--font-pixel); padding: 2px 8px; font-size: 0.9rem;
-            display: inline-block; margin-bottom: 10px;
-        }
-        .tag.eng { background: var(--retro-green); }
-        .tag.art { background: var(--retro-blue); }
-
-        footer { margin-top: 80px; padding: 40px 0; text-align: center; border-top: 2px dashed var(--text-dim); font-family: var(--font-pixel); font-size: 1.2rem; color: var(--text-dim); }
-
-        @media (max-width: 768px) {
-            .hero { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 3rem; }
-            .skills-grid { grid-template-columns: 1fr; }
-        }
-        /* --- ESTILOS DE LA BARRA DE NAVEGACIÓN --- */
-.cyber-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(15, 15, 22, 0.95); /* Fondo oscuro semitransparente */
-    padding: 15px 30px;
-    border-bottom: 2px solid #bd93f9; /* Línea morada abajo */
-    position: sticky; /* Se queda pegada arriba al bajar */
-    top: 0;
-    z-index: 1000; /* Siempre encima de todo */
-    backdrop-filter: blur(5px); /* Efecto difuminado estilo Garuda */
-}
-
-.nav-logo {
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: #f8f8f2;
-    text-shadow: 0 0 5px #50fa7b; /* Brillo verde */
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links li a {
-    text-decoration: none;
-    color: #8be9fd; /* Azul cian */
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    padding: 5px 10px;
-    border: 1px solid transparent;
-}
-
-/* Efecto al pasar el mouse (Hover) */
-.nav-links li a:hover {
-    color: #50fa7b; /* Se pone verde */
-    border: 1px solid #50fa7b; /* Cuadro verde */
-    box-shadow: 0 0 10px #50fa7b;
-    background-color: rgba(80, 250, 123, 0.1);
-}
-
-/* Enlace activo (donde estás ahora) */
-.nav-links li a.active {
-    color: #bd93f9;
-    border-bottom: 2px solid #bd93f9;
-}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EtherSentry | Dev & Photo Log</title>
+  <meta name="description" content="Portafolio de Rodrigo Frayre — Ingeniero en Nanotecnología, Control de Calidad y Fotografía Profesional. Tijuana, México.">
+  <meta property="og:title" content="EtherSentry | Dev & Photo Log">
+  <meta property="og:description" content="Calidad industrial · Automatización Python · Fotografía">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="cyber-nav">
-    <div class="nav-logo">
-        <span style="color: #50fa7b;">➜</span> ETHER_SENTRY
-    </div>
-    <ul class="nav-links">
-        <li><a href="index.html" class="active">/ROOT</a></li>
-        <li><a href="galeria.html">/GALERÍA</a></li>
-        <li><a href="#proyectos">/PROYECTOS</a></li>
-        <li><a href="mailto:tuemail@gmail.com">/CONTACTO</a></li>
-    </ul>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav class="cyber-nav">
+  <div class="nav-logo">
+    <span class="arrow">➜</span>
+    <span class="glitch" data-text="ETHER_SENTRY">ETHER_SENTRY</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">/ROOT</a></li>
+    <li><a href="galeria.html">/GALERÍA</a></li>
+    <li><a href="#proyectos">/PROYECTOS</a></li>
+    <li><a href="#archivo">/ARCHIVO</a></li>
+    <li><a href="#contacto">/CONTACTO</a></li>
+  </ul>
 </nav>
-    <div class="container">
-        <header>
-            <div class="logo pixel-font">~/RODRIGO_FRAYRE</div>
-            <div class="pixel-font" style="color: var(--retro-green);">STATUS: ONLINE</div>
-        </header>
 
-        <section class="hero">
-            <div>
-                <p class="pixel-font" style="color: var(--retro-blue); font-size: 1.4rem;">> EJECUTANDO PERFIL...</p>
-                <h1 class="pixel-font">
-                    INGENIERÍA <span style="color: var(--retro-green)">LÓGICA</span><br>
-                    ARTE <span style="color: var(--retro-purple)">VISUAL</span>
-                </h1>
-                <p>
-                    Ingeniero en Nanotecnología Nvl. 26. Especializado en control de calidad, automatización con Python y Fotografía Profesional. 
-                    Actualmente en Tijuana.
-                </p>
-                <div style="margin-top: 20px;">
-                    <a href="#projects" class="btn">Ver Bitácora</a>
-                    <a href="mailto:tuemail@gmail.com" class="btn outline">Contactar</a>
-                </div>
-            </div>
+<div class="container">
 
-            <div class="profile-card">
-                <h3 class="pixel-font" style="text-align: center; font-size: 2rem; margin-bottom: 20px;">SKILL_TREE</h3>
-                
-                <div class="stats-grid">
-                    <div class="stat-row">
-                        <div class="stat-label">
-                            <span>Python / Logic</span>
-                            <span style="color: var(--retro-green)">65%</span>
-                        </div>
-                        <div class="progress-container"><div class="progress-bar" style="width: 65%;"></div></div>
-                    </div>
-                    <div class="stat-row">
-                        <div class="stat-label">
-                            <span>Calidad / ISO</span>
-                            <span style="color: var(--retro-purple)">90%</span>
-                        </div>
-                        <div class="progress-container"><div class="progress-bar" style="width: 90%; background: var(--retro-purple);"></div></div>
-                    </div>
-                    <div class="stat-row">
-                        <div class="stat-label">
-                            <span>Foto / Arte</span>
-                            <span style="color: var(--retro-blue)">75%</span>
-                        </div>
-                        <div class="progress-container"><div class="progress-bar" style="width: 75%; background: var(--retro-blue);"></div></div>
-                    </div>
-                </div>
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <section class="hero" style="border: none; padding-top: 80px;">
+    <div>
+      <p class="hero-eyebrow pixel">&gt; EJECUTANDO PERFIL... OK</p>
+      <h1 class="pixel">
+        INGENIERÍA <span class="line-green">LÓGICA</span><br>
+        ARTE <span class="line-purple">VISUAL</span>
+      </h1>
+      <p class="hero-desc">
+        Ingeniero en Nanotecnología · Lvl. 26<br>
+        Especializado en <strong style="color:var(--green)">control de calidad</strong>,
+        <strong style="color:var(--purple)">automatización Python</strong> y
+        <strong style="color:var(--cyan)">fotografía profesional</strong>.<br>
+        Actualmente en Tijuana, México.
+      </p>
+      <p class="pixel" style="font-size:1.2rem; color:var(--text-dim); margin-bottom: 28px;">
+        &gt; <span id="typing-text"></span><span class="cursor"></span>
+      </p>
+      <div class="hero-btns">
+        <a href="galeria.html" class="btn btn-primary">Ver Galería</a>
+        <a href="#proyectos" class="btn btn-outline">Dev Log</a>
+      </div>
+    </div>
 
-                <div class="pixel-anim-container">
-                    <div class="pixel-sprite">👾</div>
-                </div>
-                <div class="pixel-font" style="text-align: center; font-size: 0.8rem; color: #555; margin-top:5px;">System scanning...</div>
-            </div>
-        </section>
+    <div class="profile-card">
+      <div class="profile-card-title">SKILL_TREE</div>
+      <div class="stat-row">
+        <div class="stat-label">
+          <span>Calidad / ISO</span>
+          <span style="color:var(--purple)">90%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:90%; background:var(--purple);" data-w="90"></div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">
+          <span>Fotografía</span>
+          <span style="color:var(--cyan)">78%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:78%; background:var(--cyan);" data-w="78"></div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">
+          <span>Python / Dev</span>
+          <span style="color:var(--green)">65%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:65%;" data-w="65"></div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">
+          <span>Linux / Bash</span>
+          <span style="color:var(--orange)">70%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:70%; background:var(--orange);" data-w="70"></div>
+        </div>
+      </div>
+      <div class="pixel-runner">
+        <div class="pixel-sprite">👾</div>
+      </div>
+      <p class="pixel" style="text-align:center; font-size:0.85rem; color:var(--text-muted); margin-top:6px;">
+        // system scanning...
+      </p>
+    </div>
+  </section>
 
-        <section id="trayectoria" style="margin-top: 50px;">
-            <h2 class="section-title pixel-font">MODE: STORY (CV)</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="company-name">NANOSCIENCE LBORATORIES</div>
-                    <div class="role-title">Inspector de Calidad / Auditor</div>
-                    <p class="pixel-font" style="color: var(--retro-blue); margin: 5px 0;">2023 - ACTUALIDAD</p>
-                    <p style="color: var(--text-dim);">
-                        Garantizando estándares (BPM/HACCP) en línea de producción. Implementación de scripts propios para agilizar auditorías y detección de errores.
-                    </p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot" style="background: var(--text-dim); box-shadow: none;"></div>
-                    <div class="company-name">INSTITUTO TECNOLOGICO DE TIJUANA</div>
-                    <div class="role-title">Ing. Nanotecnología</div>
-                    <p class="pixel-font" style="color: var(--retro-blue); margin: 5px 0;">2017 - 2023</p>
-                    <p style="color: var(--text-dim);">
-                        Formación en materiales avanzados y lógica de procesos industriales.
-                    </p>
-                </div>
-            </div>
-        </section>
+  <hr class="divider">
 
-        <section id="skills" style="margin-top: 80px;">
-            <h2 class="section-title pixel-font">ARSENAL & TOOLS</h2>
-            
-            <div class="skills-grid">
-                <div class="pixel-card" style="padding: 20px; border-color: var(--retro-green);">
-                    <h3 class="pixel-font" style="color: var(--retro-green); margin-bottom: 15px;">> ING. & CALIDAD</h3>
-                    <ul class="skill-list">
-                        <li>[+] Normativas ISO 9001</li>
-                        <li>[+] HACCP / BPM</li>
-                        <li>[+] Metrología Industrial</li>
-                        <li>[+] Lean Manufacturing</li>
-                    </ul>
-                </div>
-                <div class="pixel-card" style="padding: 20px; border-color: var(--retro-purple);">
-                    <h3 class="pixel-font" style="color: var(--retro-purple); margin-bottom: 15px;">> DEV_OPS & LINUX</h3>
-                    <ul class="skill-list">
-                        <li>[+] Python (OpenCV/Pandas)</li>
-                        <li>[+] Linux (Garuda/Hyprland)</li>
-                        <li>[+] Bash Scripting</li>
-                        <li>[+] Git / Terminal</li>
-                    </ul>
-                </div>
-                <div class="pixel-card" style="padding: 20px; border-color: var(--retro-blue);">
-                    <h3 class="pixel-font" style="color: var(--retro-blue); margin-bottom: 15px;">> MEDIA_LAB</h3>
-                    <ul class="skill-list">
-                        <li>[+] Canon DSLR (T5)</li>
-                        <li>[+] Adobe Lightroom</li>
-                        <li>[+] Impresión 3D (FDM)</li>
-                        <li>[+] Fotografía de Producto</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+  <!-- ═══════════════ TRAYECTORIA ═══════════════ -->
+  <section id="trayectoria">
+    <div class="section-header">
+      <p class="section-tag">// modo historia</p>
+      <h2 class="section-title pixel">MODE: STORY (CV)</h2>
+    </div>
 
-        <section id="projects" style="margin-top: 80px;">
-            <h2 class="section-title pixel-font">DEV_LOG & ARCHIVE</h2>
-            
-            <div class="project-grid">
-                
-                <article class="pixel-card">
-                    <div class="card-img-container">
-                        <img src="luffy.jpg" alt="Figura Luffy Egghead iluminación neon">
-                    </div>
-                    <div class="card-content">
-                        <span class="tag art">FOTOGRAFÍA CREATIVA</span>
-                        <h3 class="pixel-font" style="font-size: 1.5rem;">Luffy: Cyber Neon</h3>
-                        <p style="color: var(--text-dim); font-size: 0.9rem;">
-                            Estudio de iluminación dramática con gel de color magenta/rojo. Contraste alto para resaltar silueta y estilo Anime.
-                        </p>
-                    </div>
-                </article>
+    <div class="timeline">
 
-                <article class="pixel-card">
-                    <div class="card-img-container">
-                        <img src="cartas.jpg" alt="Carta Yu-Gi-Oh Eria Foil">
-                    </div>
-                    <div class="card-content">
-                        <span class="tag art">PRODUCTO / MACRO</span>
-                        <h3 class="pixel-font" style="font-size: 1.5rem;">TCG Collection: Eria</h3>
-                        <p style="color: var(--text-dim); font-size: 0.9rem;">
-                            Fotografía de detalle para resaltar textura holográfica (foil). Composición con fondo temático de Kuribohs.
-                        </p>
-                    </div>
-                </article>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-company">NANOSCIENCE LABORATORIES</div>
+        <div class="timeline-role">Inspector de Calidad / Auditor Interno</div>
+        <div class="timeline-date">2023 — PRESENTE</div>
+        <p class="timeline-desc">
+          Garantizando estándares BPM / HACCP en línea de producción.
+          Implementación de scripts propios en Python para agilizar auditorías,
+          detección automatizada de errores y generación de reportes.
+        </p>
+      </div>
 
-                <article class="pixel-card">
-                    <div class="card-img-container" style="background: #151515;">
-                         <span class="card-placeholder">CMD</span>
-                    </div>
-                    <div class="card-content">
-                        <span class="tag eng">PYTHON & VISION</span>
-                        <h3 class="pixel-font" style="font-size: 1.5rem;">Auto-Inspector V1</h3>
-                        <p style="color: var(--text-dim); font-size: 0.9rem;">
-                            Script en desarrollo para detección de defectos en línea mediante visión artificial (OpenCV).
-                        </p>
-                    </div>
-                </article>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="background:var(--cyan); box-shadow: 0 0 0 2px var(--cyan), var(--glow-cyan);"></div>
+        <div class="timeline-company" style="color:var(--cyan)">FOTOGRAFÍA INDEPENDIENTE</div>
+        <div class="timeline-role">Fotógrafo de Producto & Creativo</div>
+        <div class="timeline-date">2021 — PRESENTE</div>
+        <p class="timeline-desc">
+          Sesiones de fotografía de producto, macro y fotografía artística.
+          Manejo de iluminación con geles de color, composición y edición
+          en Adobe Lightroom. Canon EOS T5.
+        </p>
+      </div>
 
-            </div>
-        </section>
-
-        <footer id="contact">
-            <p>PRESS START TO CONTACT</p>
-            <br>
-            <a href="mailto:frayrerodriguezr@gmail.com" class="btn">INSERT COIN (EMAIL)</a>
-            <br><br>
-            <span style="font-size: 0.8rem; opacity: 0.5;">GAME OVER © 2026</span>
-        </footer>
+      <div class="timeline-item">
+        <div class="timeline-dot dim"></div>
+        <div class="timeline-company" style="color:var(--text-dim)">INSTITUTO TECNOLÓGICO DE TIJUANA</div>
+        <div class="timeline-role">Ing. Nanotecnología — Titulado</div>
+        <div class="timeline-date">2017 — 2023</div>
+        <p class="timeline-desc">
+          Formación en materiales avanzados, procesos industriales y lógica
+          de sistemas de calidad. Tesis relacionada con análisis de procesos
+          bajo normativas ISO.
+        </p>
+      </div>
 
     </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ═══════════════ ARSENAL ═══════════════ -->
+  <section id="skills">
+    <div class="section-header">
+      <p class="section-tag">// habilidades</p>
+      <h2 class="section-title pixel">ARSENAL & TOOLS</h2>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-card" style="border-color:var(--green)20;">
+        <h3 class="skill-card-title pixel" style="color:var(--green)">&gt; ING. & CALIDAD</h3>
+        <ul class="skill-list">
+          <li>Normativas ISO 9001</li>
+          <li>HACCP / BPM</li>
+          <li>Metrología Industrial</li>
+          <li>Lean Manufacturing</li>
+          <li>Auditorías internas</li>
+        </ul>
+      </div>
+
+      <div class="skill-card" style="border-color:var(--purple)20;">
+        <h3 class="skill-card-title pixel" style="color:var(--purple)">&gt; DEV & LINUX</h3>
+        <ul class="skill-list">
+          <li>Python (OpenCV / Pandas)</li>
+          <li>Bash Scripting</li>
+          <li>Linux — Garuda / Hyprland</li>
+          <li>Git / Terminal</li>
+          <li>Automatización de reportes</li>
+        </ul>
+      </div>
+
+      <div class="skill-card" style="border-color:var(--cyan)20;">
+        <h3 class="skill-card-title pixel" style="color:var(--cyan)">&gt; MEDIA_LAB</h3>
+        <ul class="skill-list">
+          <li>Canon EOS T5 (DSLR)</li>
+          <li>Adobe Lightroom</li>
+          <li>Fotografía de Producto</li>
+          <li>Iluminación con geles</li>
+          <li>Impresión 3D (FDM)</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ═══════════════ PROYECTOS ═══════════════ -->
+  <section id="proyectos">
+    <div class="section-header">
+      <p class="section-tag">// bitácora de desarrollo</p>
+      <h2 class="section-title pixel">DEV_LOG & ARCHIVE</h2>
+    </div>
+    <div class="project-grid">
+
+      <article class="project-card">
+        <div class="card-img">
+          <img src="luffy.jpg" alt="Luffy Cyber Neon — fotografía con gel magenta">
+        </div>
+        <div class="card-body">
+          <span class="tag tag-photo">FOTOGRAFÍA</span>
+          <h3 class="card-title pixel">Luffy: Cyber Neon</h3>
+          <p class="card-desc">
+            Estudio de iluminación dramática con gel de color magenta/rojo.
+            Contraste alto para resaltar silueta y estilo Anime.
+          </p>
+          <a href="galeria.html" class="card-link">&gt; Ver en galería →</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <div class="card-img">
+          <img src="cartas.jpg" alt="Carta Yu-Gi-Oh Eria Foil — macro">
+        </div>
+        <div class="card-body">
+          <span class="tag tag-macro">MACRO</span>
+          <h3 class="card-title pixel">TCG Collection: Eria</h3>
+          <p class="card-desc">
+            Fotografía de detalle para resaltar textura holográfica (foil).
+            Composición con fondo temático de Kuribohs.
+          </p>
+          <a href="galeria.html" class="card-link">&gt; Ver en galería →</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <div class="card-img" style="background:#0a0a12; align-items:center; justify-content:center;">
+          <span class="card-placeholder" style="color:var(--green);">CMD</span>
+        </div>
+        <div class="card-body">
+          <span class="tag tag-dev">PYTHON</span>
+          <h3 class="card-title pixel">Auto-Inspector V1</h3>
+          <p class="card-desc">
+            Script para detección de defectos en línea de producción mediante
+            visión artificial (OpenCV). En desarrollo activo.
+          </p>
+          <a href="https://github.com/EtherSentry" target="_blank" class="card-link">&gt; GitHub →</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <div class="card-img" style="background:#0a0a12;">
+          <span class="card-placeholder" style="color:var(--purple);">📊</span>
+        </div>
+        <div class="card-body">
+          <span class="tag tag-eng">CALIDAD</span>
+          <h3 class="card-title pixel">Audit Report Generator</h3>
+          <p class="card-desc">
+            Script Python + Pandas que automatiza la generación de reportes
+            de auditoría BPM/HACCP en formato Excel desde logs de producción.
+          </p>
+          <a href="https://github.com/EtherSentry" target="_blank" class="card-link">&gt; GitHub →</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ═══════════════ ARCHIVO / DOCS ═══════════════ -->
+  <section id="archivo">
+    <div class="section-header">
+      <p class="section-tag">// documentos & recursos</p>
+      <h2 class="section-title pixel">FILE_SYSTEM</h2>
+    </div>
+    <div class="archive-grid">
+
+      <div class="archive-item" onclick="window.open('#','_blank')">
+        <div class="archive-icon">📄</div>
+        <div>
+          <div class="archive-name">CV_RODRIGO_FRAYRE.pdf</div>
+          <div class="archive-meta">Curriculum Vitae · Español</div>
+          <div class="archive-size">↓ Descargar</div>
+        </div>
+      </div>
+
+      <div class="archive-item" onclick="window.open('#','_blank')">
+        <div class="archive-icon">🔬</div>
+        <div>
+          <div class="archive-name">ISO_9001_NOTES.md</div>
+          <div class="archive-meta">Apuntes auditoría interna · 2024</div>
+          <div class="archive-size">↓ Ver documento</div>
+        </div>
+      </div>
+
+      <div class="archive-item" onclick="window.open('https://github.com/EtherSentry','_blank')">
+        <div class="archive-icon">🐍</div>
+        <div>
+          <div class="archive-name">auto_inspector_v1.py</div>
+          <div class="archive-meta">Python · OpenCV · En desarrollo</div>
+          <div class="archive-size">→ Ver en GitHub</div>
+        </div>
+      </div>
+
+      <div class="archive-item" onclick="window.open('galeria.html','_self')">
+        <div class="archive-icon">📷</div>
+        <div>
+          <div class="archive-name">PHOTO_ARCHIVE_2024</div>
+          <div class="archive-meta">Fotografía de producto y artística</div>
+          <div class="archive-size">→ Abrir galería</div>
+        </div>
+      </div>
+
+      <div class="archive-item" onclick="window.open('#','_blank')">
+        <div class="archive-icon">📊</div>
+        <div>
+          <div class="archive-name">AUDIT_REPORT_TEMPLATE.xlsx</div>
+          <div class="archive-meta">Plantilla Excel · Auditorías BPM</div>
+          <div class="archive-size">↓ Descargar plantilla</div>
+        </div>
+      </div>
+
+      <div class="archive-item" onclick="window.open('#','_blank')">
+        <div class="archive-icon">🖥️</div>
+        <div>
+          <div class="archive-name">DOTFILES_CONFIG</div>
+          <div class="archive-meta">Garuda Linux · Hyprland config</div>
+          <div class="archive-size">→ Ver en GitHub</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ═══════════════ CONTACTO ═══════════════ -->
+  <section id="contacto">
+    <div class="section-header">
+      <p class="section-tag">// insertar moneda</p>
+      <h2 class="section-title pixel">PRESS START</h2>
+    </div>
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <h2 class="pixel" style="font-size:2.5rem; margin-bottom:10px;">
+          HABLEMOS
+        </h2>
+        <p>¿Proyecto de fotografía, automatización de procesos, o consultoría de calidad? Mándame un mensaje.</p>
+        <div class="contact-links">
+          <a href="mailto:frayrerodriguezr@gmail.com" class="contact-link">
+            <span class="contact-link-icon">✉️</span>
+            <div>
+              <div>frayrerodriguezr@gmail.com</div>
+              <div class="contact-link-label">Email principal</div>
+            </div>
+          </a>
+          <a href="https://github.com/EtherSentry" target="_blank" class="contact-link">
+            <span class="contact-link-icon">🐙</span>
+            <div>
+              <div>github.com/EtherSentry</div>
+              <div class="contact-link-label">Repositorios & código</div>
+            </div>
+          </a>
+          <div class="contact-link" style="cursor:default;">
+            <span class="contact-link-icon">📍</span>
+            <div>
+              <div>Tijuana, México</div>
+              <div class="contact-link-label">Ubicación actual</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-group">
+          <label class="form-label">Nombre</label>
+          <input class="form-input" type="text" placeholder="Tu nombre" id="cf-name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="tu@email.com" id="cf-email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mensaje</label>
+          <textarea class="form-textarea" placeholder="Cuéntame tu proyecto..." id="cf-message"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="sendContactForm()" style="width:100%; font-size:1.4rem;">
+          SEND_MESSAGE.exe
+        </button>
+        <p id="cf-status" class="pixel" style="font-size:1.1rem; color:var(--green); display:none; margin-top:8px;">
+          &gt; Mensaje enviado. Responderé pronto.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /container -->
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="container" style="text-align:center;">
+    <div class="footer-cta pixel">GAME OVER — PRESS START AGAIN</div>
+    <p style="font-size:0.9rem; margin-top:4px;">© 2026 · Rodrigo Frayre · EtherSentry · Hecho con 💜 + Terminal</p>
+  </div>
+</footer>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script>
+/* ---- TYPING EFFECT ---- */
+const lines = [
+  "Ingeniero en Nanotecnología",
+  "Control de Calidad / ISO 9001",
+  "Automatización con Python",
+  "Fotografía Profesional",
+  "Linux Enjoyer 🐧"
+];
+let li = 0, ci = 0, deleting = false;
+const el = document.getElementById('typing-text');
+function type() {
+  const cur = lines[li];
+  if (!deleting) {
+    el.textContent = cur.slice(0, ++ci);
+    if (ci === cur.length) { deleting = true; setTimeout(type, 1800); return; }
+  } else {
+    el.textContent = cur.slice(0, --ci);
+    if (ci === 0) { deleting = false; li = (li + 1) % lines.length; }
+  }
+  setTimeout(type, deleting ? 40 : 75);
+}
+type();
+
+/* ---- INTERSECTION OBSERVER (scroll animations) ---- */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll(
+  '.timeline-item, .skill-card, .project-card, .archive-item'
+).forEach(el => observer.observe(el));
+
+/* ---- PROGRESS BARS ---- */
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.progress-fill').forEach(bar => {
+        bar.classList.add('animate');
+      });
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.profile-card').forEach(c => barObserver.observe(c));
+
+/* ---- CONTACT FORM (mailto fallback) ---- */
+function sendContactForm() {
+  const name    = document.getElementById('cf-name').value.trim();
+  const email   = document.getElementById('cf-email').value.trim();
+  const message = document.getElementById('cf-message').value.trim();
+  if (!name || !email || !message) {
+    alert('Por favor completa todos los campos.');
+    return;
+  }
+  const subject = encodeURIComponent(`Contacto desde portafolio — ${name}`);
+  const body    = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n\n${message}`);
+  window.location.href = `mailto:frayrerodriguezr@gmail.com?subject=${subject}&body=${body}`;
+  document.getElementById('cf-status').style.display = 'block';
+}
+</script>
+
 </body>
 </html>
-
