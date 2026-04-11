@@ -803,6 +803,210 @@ footer .footer-cta { font-size: 1.8rem; color: var(--text-main); margin-bottom: 
 /* ============================================================
    RESPONSIVE
    ============================================================ */
+/* ============================================================
+   HOBBIES & GAMING SECTION
+   ============================================================ */
+.hobbies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.hobby-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.25s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.hobby-card.visible { opacity: 1; transform: translateY(0); }
+.hobby-card:hover {
+  border-color: var(--cyan);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(139,233,253,0.12);
+}
+.hobby-card--tcg { grid-column: span 2; }
+
+.hobby-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--border);
+}
+.hobby-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  font-family: var(--font-pixel);
+  font-size: 0.95rem;
+  color: var(--bg-dark);
+  letter-spacing: 1px;
+}
+.hobby-title { font-size: 1.4rem; color: var(--text-main); }
+.hobby-link {
+  font-size: 0.78rem;
+  color: var(--cyan);
+  border-bottom: 1px dashed var(--cyan);
+  align-self: flex-start;
+  margin-top: auto;
+}
+.hobby-link:hover { color: var(--green); border-color: var(--green); }
+
+/* --- TCG grid --- */
+.tcg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+}
+.tcg-card {
+  background: #0a0a12;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: all 0.25s;
+}
+.tcg-card:hover {
+  border-color: var(--pink);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255,121,198,0.2);
+}
+.tcg-card img { width: 100%; height: 170px; object-fit: cover; display: block; }
+.tcg-card figcaption { padding: 10px 12px; border-top: 1px solid var(--border); }
+.tcg-name {
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: 1.15rem;
+  color: var(--text-main);
+}
+.tcg-rarity {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--yellow);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* --- Backloggd game list --- */
+.game-list { display: flex; flex-direction: column; gap: 2px; }
+.game-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  padding: 7px 0;
+  border-bottom: 1px solid var(--bg-panel);
+}
+.platform {
+  font-family: var(--font-pixel);
+  font-size: 0.78rem;
+  padding: 2px 8px;
+  color: var(--bg-dark);
+  min-width: 62px;
+  text-align: center;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+.platform.switch { background: #e60012; color: #fff; }
+.platform.ds     { background: var(--cyan); }
+.platform.n64    { background: var(--purple); }
+
+/* --- Discord (Lanyard) --- */
+.discord-body { display: flex; gap: 16px; align-items: center; }
+.discord-avatar { position: relative; width: 72px; height: 72px; flex-shrink: 0; }
+.discord-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg-panel);
+  object-fit: cover;
+}
+.discord-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  border: 3px solid var(--bg-card);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.discord-dot[data-status="online"] { background: var(--green);  box-shadow: 0 0 10px var(--green); }
+.discord-dot[data-status="idle"]   { background: var(--yellow); box-shadow: 0 0 10px var(--yellow); }
+.discord-dot[data-status="dnd"]    { background: var(--pink);   box-shadow: 0 0 10px var(--pink); }
+.discord-dot[data-status="offline"]{ background: var(--text-muted); }
+.discord-info { min-width: 0; flex: 1; }
+.discord-name {
+  font-family: var(--font-pixel);
+  font-size: 1.3rem;
+  color: var(--text-main);
+}
+.discord-state {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+.discord-activity {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: var(--cyan);
+}
+
+/* --- Steam --- */
+.steam-widget {
+  display: block;
+  background: #0d0d14;
+  border: 1px solid var(--border);
+  padding: 10px;
+  text-align: center;
+  min-height: 80px;
+}
+.steam-widget img { max-width: 100%; margin: 0 auto; display: inline-block; }
+.steam-fallback {
+  display: inline-block;
+  padding: 22px 12px;
+  font-size: 0.76rem;
+  color: var(--orange);
+}
+
+/* --- Nintendo --- */
+.nintendo-body { display: flex; gap: 16px; align-items: center; }
+.nintendo-avatar {
+  width: 82px;
+  height: 82px;
+  border: 2px solid #e60012;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0 18px rgba(230,0,18,0.35);
+}
+.nintendo-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.nintendo-name {
+  font-family: var(--font-pixel);
+  font-size: 1.5rem;
+  color: #ff4757;
+}
+.nintendo-meta {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 2px 0 6px;
+}
+.nintendo-code {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  color: var(--text-main);
+  background: var(--bg-panel);
+  padding: 5px 10px;
+  border-left: 3px solid #e60012;
+}
+
 @media (max-width: 768px) {
   .hero {
     grid-template-columns: 1fr;
@@ -814,6 +1018,7 @@ footer .footer-cta { font-size: 1.8rem; color: var(--text-main); margin-bottom: 
   .masonry-grid { columns: 2 180px; }
   .cyber-nav { padding: 12px 16px; }
   .nav-links a { font-size: 0.7rem; padding: 4px 8px; }
+  .hobby-card--tcg { grid-column: span 1; }
 }
 
 @media (max-width: 480px) {
