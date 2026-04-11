@@ -26,6 +26,7 @@
     <li><a href="galeria.html">/GALERÍA</a></li>
     <li><a href="#proyectos">/PROYECTOS</a></li>
     <li><a href="#archivo">/ARCHIVO</a></li>
+    <li><a href="#hobbies">/HOBBIES</a></li>
     <li><a href="#contacto">/CONTACTO</a></li>
   </ul>
 </nav>
@@ -341,6 +342,131 @@
 
   <hr class="divider">
 
+  <!-- ═══════════════ HOBBIES & GAMING ═══════════════ -->
+  <section id="hobbies">
+    <div class="section-header">
+      <p class="section-tag">// off-duty · side quests</p>
+      <h2 class="section-title pixel">HOBBY_RACK</h2>
+    </div>
+
+    <div class="hobbies-grid">
+
+      <!-- ── TCG Collection ── -->
+      <div class="hobby-card hobby-card--tcg">
+        <div class="hobby-card-head">
+          <span class="hobby-tag" style="background:var(--pink);">TCG</span>
+          <h3 class="hobby-title pixel">Colección de Cartas</h3>
+        </div>
+        <div class="tcg-grid">
+          <figure class="tcg-card">
+            <img src="cartas.jpg" alt="Eria the Water Charmer">
+            <figcaption>
+              <span class="tcg-name">Eria the Water Charmer</span>
+              <span class="tcg-rarity">★ Secret Rare</span>
+            </figcaption>
+          </figure>
+          <figure class="tcg-card">
+            <img src="cartas.jpg" alt="Blue-Eyes White Dragon">
+            <figcaption>
+              <span class="tcg-name">Blue-Eyes W. Dragon</span>
+              <span class="tcg-rarity">★★ Ultra Rare</span>
+            </figcaption>
+          </figure>
+          <figure class="tcg-card">
+            <img src="cartas.jpg" alt="Dark Magician">
+            <figcaption>
+              <span class="tcg-name">Dark Magician</span>
+              <span class="tcg-rarity">★ Rare</span>
+            </figcaption>
+          </figure>
+          <figure class="tcg-card">
+            <img src="cartas.jpg" alt="Winged Kuriboh">
+            <figcaption>
+              <span class="tcg-name">Winged Kuriboh</span>
+              <span class="tcg-rarity">Common · Foil</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- ── Backloggd ── -->
+      <div class="hobby-card hobby-card--backloggd">
+        <div class="hobby-card-head">
+          <span class="hobby-tag" style="background:var(--orange);">BACKLOGGD</span>
+          <h3 class="hobby-title pixel">Game Catalog</h3>
+        </div>
+        <ul class="game-list">
+          <li><span class="platform switch">SWITCH</span> Zelda: Tears of the Kingdom</li>
+          <li><span class="platform switch">SWITCH</span> Metroid Prime Remastered</li>
+          <li><span class="platform ds">3DS</span> Pokémon X</li>
+          <li><span class="platform ds">3DS</span> Fire Emblem: Awakening</li>
+          <li><span class="platform n64">N64</span> The Legend of Zelda: OoT</li>
+          <li><span class="platform n64">N64</span> Super Mario 64</li>
+        </ul>
+        <a href="https://www.backloggd.com/u/TU_USUARIO_BACKLOGGD/" target="_blank" class="hobby-link">
+          &gt; Ver perfil completo en Backloggd →
+        </a>
+      </div>
+
+      <!-- ── Discord (Lanyard) ── -->
+      <div class="hobby-card hobby-card--discord">
+        <div class="hobby-card-head">
+          <span class="hobby-tag" style="background:#5865F2; color:#fff;">DISCORD</span>
+          <h3 class="hobby-title pixel">Live Status</h3>
+        </div>
+        <div class="discord-body">
+          <div class="discord-avatar">
+            <img id="discord-avatar" src="" alt="Discord avatar">
+            <span class="discord-dot" id="discord-dot" data-status="offline"></span>
+          </div>
+          <div class="discord-info">
+            <div class="discord-name" id="discord-name">cargando...</div>
+            <div class="discord-state" id="discord-state">&gt; conectando a lanyard...</div>
+            <div class="discord-activity" id="discord-activity"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Steam ── -->
+      <div class="hobby-card hobby-card--steam">
+        <div class="hobby-card-head">
+          <span class="hobby-tag" style="background:#1b2838; color:var(--cyan);">STEAM</span>
+          <h3 class="hobby-title pixel">Steam Profile</h3>
+        </div>
+        <a href="https://steamcommunity.com/profiles/TU_STEAMID64/" target="_blank" class="steam-widget">
+          <img src="https://steamsignature.com/status/english/TU_STEAMID64.png"
+               alt="Steam live status"
+               onerror="this.outerHTML='&lt;span class=&quot;steam-fallback&quot;&gt;⚠ Widget Steam no disponible — reemplaza TU_STEAMID64&lt;/span&gt;';">
+        </a>
+        <a href="https://steamcommunity.com/profiles/TU_STEAMID64/" target="_blank" class="hobby-link">
+          &gt; Abrir en Steam →
+        </a>
+      </div>
+
+      <!-- ── Nintendo ── -->
+      <div class="hobby-card hobby-card--nintendo">
+        <div class="hobby-card-head">
+          <span class="hobby-tag" style="background:#e60012; color:#fff;">NINTENDO</span>
+          <h3 class="hobby-title pixel">Switch Profile</h3>
+        </div>
+        <div class="nintendo-body">
+          <div class="nintendo-avatar">
+            <img src="luffy.jpg" alt="Nintendo avatar">
+          </div>
+          <div class="nintendo-info">
+            <div class="nintendo-name">EtherSentry</div>
+            <div class="nintendo-meta">Nickname</div>
+            <div class="nintendo-code">SW-0000-0000-0000</div>
+            <div class="nintendo-meta">Friend Code</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
   <!-- ═══════════════ CONTACTO ═══════════════ -->
   <section id="contacto">
     <div class="section-header">
@@ -448,7 +574,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll(
-  '.timeline-item, .skill-card, .project-card, .archive-item'
+  '.timeline-item, .skill-card, .project-card, .archive-item, .hobby-card'
 ).forEach(el => observer.observe(el));
 
 /* ---- PROGRESS BARS ---- */
@@ -477,6 +603,49 @@ function sendContactForm() {
   window.location.href = `mailto:frayrerodriguezr@gmail.com?subject=${subject}&body=${body}`;
   document.getElementById('cf-status').style.display = 'block';
 }
+
+/* ---- LANYARD · DISCORD LIVE STATUS ---- */
+/* Requisito: unirte al servidor https://discord.gg/lanyard con tu cuenta */
+const LANYARD_USER_ID = 'TU_DISCORD_USER_ID'; // <-- 17-19 dígitos (Dev Mode → click derecho → Copy User ID)
+
+async function pollLanyard() {
+  const stateEl    = document.getElementById('discord-state');
+  const nameEl     = document.getElementById('discord-name');
+  const avatarEl   = document.getElementById('discord-avatar');
+  const dotEl      = document.getElementById('discord-dot');
+  const activityEl = document.getElementById('discord-activity');
+
+  if (!LANYARD_USER_ID || LANYARD_USER_ID === 'TU_DISCORD_USER_ID') {
+    stateEl.textContent = '> configura LANYARD_USER_ID en index.html';
+    return;
+  }
+  try {
+    const res = await fetch(`https://api.lanyard.rest/v1/users/${LANYARD_USER_ID}`);
+    const json = await res.json();
+    if (!json.success) throw new Error('lanyard miss');
+    const d = json.data;
+    const hash = d.discord_user.avatar;
+    avatarEl.src = hash
+      ? `https://cdn.discordapp.com/avatars/${d.discord_user.id}/${hash}.${hash.startsWith('a_') ? 'gif' : 'png'}?size=128`
+      : `https://cdn.discordapp.com/embed/avatars/0.png`;
+    nameEl.textContent = d.discord_user.global_name || d.discord_user.username;
+    const map = {
+      online:  '> Conectado',
+      idle:    '> Ausente',
+      dnd:     '> No molestar',
+      offline: '> Desconectado',
+    };
+    stateEl.textContent = map[d.discord_status] || '> sin estado';
+    dotEl.dataset.status = d.discord_status;
+    const game = (d.activities || []).find(a => a.type === 0);
+    activityEl.textContent = game ? `🎮 Jugando ${game.name}` : '';
+  } catch (e) {
+    stateEl.textContent = '> Lanyard offline';
+    dotEl.dataset.status = 'offline';
+  }
+}
+pollLanyard();
+setInterval(pollLanyard, 20000);
 </script>
 
 </body>
