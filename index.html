@@ -351,8 +351,61 @@
 
     <div class="hobbies-grid">
 
+      <!-- ── Nintendo profile ── -->
+      <div class="hobby-card hobby-card--profile hobby-card--nintendo">
+        <div class="hobby-card-head">
+          <span class="hobby-tag" style="background:#e60012; color:#fff;">NINTENDO</span>
+          <h3 class="hobby-title pixel">Switch Profile</h3>
+        </div>
+        <div class="nintendo-body">
+          <div class="nintendo-avatar">
+            <img src="luffy.jpg" alt="Nintendo avatar">
+          </div>
+          <div class="nintendo-info">
+            <div class="nintendo-name">EtherSentry</div>
+            <div class="nintendo-meta">Nickname</div>
+            <div class="nintendo-code">SW-0000-0000-0000</div>
+            <div class="nintendo-meta">Friend Code</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Steam profile ── -->
+      <div class="hobby-card hobby-card--profile hobby-card--steam">
+        <div class="hobby-card-head">
+          <span class="hobby-tag" style="background:#1b2838; color:var(--cyan);">STEAM</span>
+          <h3 class="hobby-title pixel">Steam Profile</h3>
+        </div>
+        <div class="steam-widget" id="steam-widget">
+          <span class="steam-fallback">&gt; configura STEAM_ID64 en index.html</span>
+        </div>
+        <a href="https://steamcommunity.com/profiles/TU_STEAMID64/" target="_blank" class="hobby-link">
+          &gt; Abrir en Steam →
+        </a>
+      </div>
+
+      <!-- ── Discord (Lanyard) ── -->
+      <div class="hobby-card hobby-card--profile hobby-card--discord">
+        <div class="hobby-card-head">
+          <span class="hobby-tag" style="background:#5865F2; color:#fff;">DISCORD</span>
+          <h3 class="hobby-title pixel">Live Status</h3>
+        </div>
+        <div class="discord-body">
+          <div class="discord-avatar">
+            <img id="discord-avatar" alt="Discord avatar"
+                 src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%2313131e'/%3E%3Ctext x='36' y='50' font-family='monospace' font-size='38' fill='%236272a4' text-anchor='middle'%3E%3F%3C/text%3E%3C/svg%3E">
+            <span class="discord-dot" id="discord-dot" data-status="offline"></span>
+          </div>
+          <div class="discord-info">
+            <div class="discord-name" id="discord-name">— no configurado —</div>
+            <div class="discord-state" id="discord-state">&gt; configura LANYARD_USER_ID</div>
+            <div class="discord-activity" id="discord-activity"></div>
+          </div>
+        </div>
+      </div>
+
       <!-- ── TCG Collection ── -->
-      <div class="hobby-card hobby-card--tcg">
+      <div class="hobby-card hobby-card--full hobby-card--tcg">
         <div class="hobby-card-head">
           <span class="hobby-tag" style="background:var(--pink);">TCG</span>
           <h3 class="hobby-title pixel">Colección de Cartas</h3>
@@ -389,76 +442,19 @@
         </div>
       </div>
 
-      <!-- ── Backloggd ── -->
-      <div class="hobby-card hobby-card--backloggd">
+      <!-- ── Backloggd carousel ── -->
+      <div class="hobby-card hobby-card--full hobby-card--backloggd">
         <div class="hobby-card-head">
           <span class="hobby-tag" style="background:var(--orange);">BACKLOGGD</span>
           <h3 class="hobby-title pixel">Game Catalog</h3>
+          <a href="https://www.backloggd.com/u/TU_USUARIO_BACKLOGGD/" target="_blank" class="hobby-link backloggd-head-link">
+            &gt; Perfil →
+          </a>
         </div>
-        <ul class="game-list">
-          <li><span class="platform switch">SWITCH</span> Zelda: Tears of the Kingdom</li>
-          <li><span class="platform switch">SWITCH</span> Metroid Prime Remastered</li>
-          <li><span class="platform ds">3DS</span> Pokémon X</li>
-          <li><span class="platform ds">3DS</span> Fire Emblem: Awakening</li>
-          <li><span class="platform n64">N64</span> The Legend of Zelda: OoT</li>
-          <li><span class="platform n64">N64</span> Super Mario 64</li>
-        </ul>
-        <a href="https://www.backloggd.com/u/TU_USUARIO_BACKLOGGD/" target="_blank" class="hobby-link">
-          &gt; Ver perfil completo en Backloggd →
-        </a>
-      </div>
-
-      <!-- ── Discord (Lanyard) ── -->
-      <div class="hobby-card hobby-card--discord">
-        <div class="hobby-card-head">
-          <span class="hobby-tag" style="background:#5865F2; color:#fff;">DISCORD</span>
-          <h3 class="hobby-title pixel">Live Status</h3>
-        </div>
-        <div class="discord-body">
-          <div class="discord-avatar">
-            <img id="discord-avatar" src="" alt="Discord avatar">
-            <span class="discord-dot" id="discord-dot" data-status="offline"></span>
-          </div>
-          <div class="discord-info">
-            <div class="discord-name" id="discord-name">cargando...</div>
-            <div class="discord-state" id="discord-state">&gt; conectando a lanyard...</div>
-            <div class="discord-activity" id="discord-activity"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── Steam ── -->
-      <div class="hobby-card hobby-card--steam">
-        <div class="hobby-card-head">
-          <span class="hobby-tag" style="background:#1b2838; color:var(--cyan);">STEAM</span>
-          <h3 class="hobby-title pixel">Steam Profile</h3>
-        </div>
-        <a href="https://steamcommunity.com/profiles/TU_STEAMID64/" target="_blank" class="steam-widget">
-          <img src="https://steamsignature.com/status/english/TU_STEAMID64.png"
-               alt="Steam live status"
-               onerror="this.outerHTML='&lt;span class=&quot;steam-fallback&quot;&gt;⚠ Widget Steam no disponible — reemplaza TU_STEAMID64&lt;/span&gt;';">
-        </a>
-        <a href="https://steamcommunity.com/profiles/TU_STEAMID64/" target="_blank" class="hobby-link">
-          &gt; Abrir en Steam →
-        </a>
-      </div>
-
-      <!-- ── Nintendo ── -->
-      <div class="hobby-card hobby-card--nintendo">
-        <div class="hobby-card-head">
-          <span class="hobby-tag" style="background:#e60012; color:#fff;">NINTENDO</span>
-          <h3 class="hobby-title pixel">Switch Profile</h3>
-        </div>
-        <div class="nintendo-body">
-          <div class="nintendo-avatar">
-            <img src="luffy.jpg" alt="Nintendo avatar">
-          </div>
-          <div class="nintendo-info">
-            <div class="nintendo-name">EtherSentry</div>
-            <div class="nintendo-meta">Nickname</div>
-            <div class="nintendo-code">SW-0000-0000-0000</div>
-            <div class="nintendo-meta">Friend Code</div>
-          </div>
+        <div class="backloggd-carousel">
+          <button class="carousel-nav prev" id="bl-prev" aria-label="Anterior">◀</button>
+          <div class="carousel-track" id="bl-track"></div>
+          <button class="carousel-nav next" id="bl-next" aria-label="Siguiente">▶</button>
         </div>
       </div>
 
@@ -539,6 +535,19 @@
   </div>
 </footer>
 
+<!-- ═══════════════ GAME PANEL MODAL ═══════════════ -->
+<div class="game-panel" id="game-panel" aria-hidden="true">
+  <div class="game-panel-box">
+    <button class="game-panel-close" id="gp-close" aria-label="Cerrar">✕</button>
+    <div class="game-panel-header">
+      <span class="game-panel-platform" id="gp-platform"></span>
+      <h3 class="game-panel-title pixel" id="gp-title"></h3>
+    </div>
+    <div class="game-panel-shots" id="gp-shots"></div>
+    <p class="game-panel-opinion" id="gp-opinion"></p>
+  </div>
+</div>
+
 <!-- ═══════════════ SCRIPTS ═══════════════ -->
 <script>
 /* ---- TYPING EFFECT ---- */
@@ -604,6 +613,21 @@ function sendContactForm() {
   document.getElementById('cf-status').style.display = 'block';
 }
 
+/* ---- STEAM WIDGET (carga condicional, sin <img> roto al inicio) ---- */
+const STEAM_ID64 = 'TU_STEAMID64'; // <-- reemplaza con tu SteamID64 (17 dígitos) de https://steamid.io
+(function initSteamWidget() {
+  const container = document.getElementById('steam-widget');
+  if (!container) return;
+  if (!STEAM_ID64 || STEAM_ID64 === 'TU_STEAMID64') return; // conserva fallback
+  const img = new Image();
+  img.alt = 'Steam live status';
+  img.onload  = () => { container.innerHTML = ''; container.appendChild(img); };
+  img.onerror = () => {
+    container.innerHTML = '<span class="steam-fallback">⚠ Widget Steam no disponible</span>';
+  };
+  img.src = `https://steamsignature.com/status/english/${STEAM_ID64}.png`;
+})();
+
 /* ---- LANYARD · DISCORD LIVE STATUS ---- */
 /* Requisito: unirte al servidor https://discord.gg/lanyard con tu cuenta */
 const LANYARD_USER_ID = 'TU_DISCORD_USER_ID'; // <-- 17-19 dígitos (Dev Mode → click derecho → Copy User ID)
@@ -615,10 +639,7 @@ async function pollLanyard() {
   const dotEl      = document.getElementById('discord-dot');
   const activityEl = document.getElementById('discord-activity');
 
-  if (!LANYARD_USER_ID || LANYARD_USER_ID === 'TU_DISCORD_USER_ID') {
-    stateEl.textContent = '> configura LANYARD_USER_ID en index.html';
-    return;
-  }
+  if (!LANYARD_USER_ID || LANYARD_USER_ID === 'TU_DISCORD_USER_ID') return;
   try {
     const res = await fetch(`https://api.lanyard.rest/v1/users/${LANYARD_USER_ID}`);
     const json = await res.json();
@@ -646,6 +667,112 @@ async function pollLanyard() {
 }
 pollLanyard();
 setInterval(pollLanyard, 20000);
+
+/* ---- BACKLOGGD · CARRUSEL + PANEL DE DETALLE ---- */
+/* Edita este array con tus juegos. Reemplaza las rutas con imágenes reales en la raíz del repo. */
+const BACKLOGGD_GAMES = [
+  {
+    id: 'totk',
+    title: 'Zelda: Tears of the Kingdom',
+    platform: 'SWITCH',
+    cover: 'cartas.jpg',
+    screenshots: ['luffy.jpg', 'cartas.jpg'],
+    opinion: 'Una secuela monumental. Los shrines y el sistema de construcción me atraparon semanas enteras.',
+  },
+  {
+    id: 'metroid-prime',
+    title: 'Metroid Prime Remastered',
+    platform: 'SWITCH',
+    cover: 'luffy.jpg',
+    screenshots: ['luffy.jpg'],
+    opinion: 'El remaster perfecto. Controles renovados sin traicionar al original.',
+  },
+  {
+    id: 'pokemon-x',
+    title: 'Pokémon X',
+    platform: '3DS',
+    cover: 'cartas.jpg',
+    screenshots: ['cartas.jpg'],
+    opinion: 'Mi primera entrada 3D. Kalos sigue siendo mi región favorita.',
+  },
+  {
+    id: 'fire-emblem',
+    title: 'Fire Emblem: Awakening',
+    platform: '3DS',
+    cover: 'luffy.jpg',
+    screenshots: ['luffy.jpg'],
+    opinion: 'Táctico, emotivo, adictivo. Horas grindeando supports.',
+  },
+  {
+    id: 'oot',
+    title: 'Ocarina of Time',
+    platform: 'N64',
+    cover: 'cartas.jpg',
+    screenshots: ['cartas.jpg'],
+    opinion: 'Clásico atemporal. Lo rejuego cada 2 años.',
+  },
+  {
+    id: 'mario64',
+    title: 'Super Mario 64',
+    platform: 'N64',
+    cover: 'luffy.jpg',
+    screenshots: ['luffy.jpg'],
+    opinion: 'La piedra angular del 3D platformer. Aún se siente moderno.',
+  },
+];
+
+(function initBackloggd() {
+  const track = document.getElementById('bl-track');
+  if (!track) return;
+
+  track.innerHTML = BACKLOGGD_GAMES.map(g => `
+    <button class="game-card" data-game-id="${g.id}" type="button">
+      <div class="game-cover" style="background-image:url('${g.cover}')"></div>
+      <div class="game-card-meta">
+        <span class="game-card-title">${g.title}</span>
+        <span class="game-card-platform">${g.platform}</span>
+      </div>
+    </button>
+  `).join('');
+
+  const prev = document.getElementById('bl-prev');
+  const next = document.getElementById('bl-next');
+  const step = () => Math.max(220, track.clientWidth * 0.75);
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left:  step(), behavior: 'smooth' }));
+
+  track.addEventListener('click', (e) => {
+    const btn = e.target.closest('.game-card');
+    if (!btn) return;
+    const game = BACKLOGGD_GAMES.find(g => g.id === btn.dataset.gameId);
+    if (game) openGamePanel(game);
+  });
+
+  const panel = document.getElementById('game-panel');
+  document.getElementById('gp-close').addEventListener('click', closeGamePanel);
+  panel.addEventListener('click', (e) => { if (e.target === panel) closeGamePanel(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeGamePanel(); });
+})();
+
+function openGamePanel(game) {
+  document.getElementById('gp-title').textContent    = game.title;
+  document.getElementById('gp-platform').textContent = game.platform;
+  document.getElementById('gp-opinion').textContent  = game.opinion;
+  const shotsEl = document.getElementById('gp-shots');
+  shotsEl.innerHTML = (game.screenshots || [])
+    .map(s => `<img src="${s}" alt="${game.title} screenshot">`)
+    .join('');
+  const panel = document.getElementById('game-panel');
+  panel.classList.add('open');
+  panel.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function closeGamePanel() {
+  const panel = document.getElementById('game-panel');
+  panel.classList.remove('open');
+  panel.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
 </script>
 
 </body>
