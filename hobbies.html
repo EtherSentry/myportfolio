@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EtherSentry | Hobby Rack</title>
+  <meta name="description" content="Gaming, Discord live, Steam, Nintendo y colección de cartas de Rodrigo Frayre.">
+  <meta property="og:title" content="EtherSentry | Hobby Rack">
+  <meta property="og:description" content="Live Discord · Steam · Nintendo · TCG · Backloggd">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ethersentry.github.io/myportfolio/hobbies.html">
+  <meta property="og:image" content="https://ethersentry.github.io/myportfolio/luffy.jpg">
+  <meta name="theme-color" content="#0d0d14">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d14'/%3E%3Ctext x='16' y='25' font-family='monospace' font-weight='700' font-size='24' fill='%2350fa7b' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav class="cyber-nav">
+  <div class="nav-logo">
+    <span class="arrow">➜</span>
+    <span class="glitch" data-text="ETHER_SENTRY">ETHER_SENTRY</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">/ROOT</a></li>
+    <li><a href="galeria.html">/GALERÍA</a></li>
+    <li><a href="hobbies.html" class="active">/HOBBIES</a></li>
+    <li><a href="index.html#proyectos">/PROYECTOS</a></li>
+    <li><a href="index.html#archivo">/ARCHIVO</a></li>
+    <li><a href="index.html#contacto">/CONTACTO</a></li>
+  </ul>
+</nav>
+
+<div class="container container--wide">
+
+  <header class="gallery-header">
+    <h1 class="gallery-title pixel">HOBBY_RACK</h1>
+    <p class="gallery-sub">
+      [ SYSTEM LOGS: GAMING &amp; COLLECTING ]<br>
+      Discord · Steam · Nintendo · TCG · Backloggd
+    </p>
+  </header>
+
+  <section id="hobbies">
+    <div class="hobbies-grid">
+
+      <!-- ── Nintendo profile ── -->
+      <div class="hobby-card hobby-card--profile hobby-card--nintendo">
+        <div class="hobby-card-head">
+          <span class="hobby-tag" style="background:#e60012; color:#fff;">NINTENDO</span>
+          <h3 class="hobby-title pixel">Switch Profile</h3>
+        </div>
+        <div class="nintendo-body">
+          <div class="nintendo-avatar">
+            <img src="luffy.jpg" alt="Nintendo avatar">
+          </div>
+          <div class="nintendo-info">
+            <div class="nintendo-name">EtherSentry</div>
+            <div class="nintendo-meta">Nickname</div>
+            <div class="nintendo-code">SW-0000-0000-0000</div>
+            <div class="nintendo-meta">Friend Code</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Steam profile ── -->
+      <div class="hobby-card hobby-card--profile hobby-card--steam">
+        <div class="hobby-card-head">
+          <span class="hobby-tag" style="background:#1b2838; color:var(--cyan);">STEAM</span>
+          <h3 class="hobby-title pixel">Steam Profile</h3>
+        </div>
+        <div class="steam-widget" id="steam-widget">
+          <span class="steam-fallback">&gt; cargando widget...</span>
+        </div>
+        <a href="https://steamcommunity.com/profiles/76561198159428118/" target="_blank" class="hobby-link">
+          &gt; Abrir en Steam →
+        </a>
+      </div>
+
+      <!-- ── Discord (Lanyard) ── -->
+      <div class="hobby-card hobby-card--profile hobby-card--discord">
+        <div class="hobby-card-head">
+          <span class="hobby-tag" style="background:#5865F2; color:#fff;">DISCORD</span>
+          <h3 class="hobby-title pixel">Live Status</h3>
+        </div>
+        <div class="discord-body">
+          <div class="discord-avatar">
+            <img id="discord-avatar" alt="Discord avatar"
+                 src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%2313131e'/%3E%3Ctext x='36' y='50' font-family='monospace' font-size='38' fill='%236272a4' text-anchor='middle'%3E%3F%3C/text%3E%3C/svg%3E">
+            <span class="discord-dot" id="discord-dot" data-status="offline"></span>
+          </div>
+          <div class="discord-info">
+            <div class="discord-name" id="discord-name">conectando...</div>
+            <div class="discord-state" id="discord-state">&gt; lanyard</div>
+            <div class="discord-custom" id="discord-custom" hidden></div>
+            <div class="discord-activity" id="discord-activity"></div>
+          </div>
+        </div>
+        <div class="spotify-panel" id="spotify-panel" hidden>
+          <img class="spotify-art" id="spotify-art" alt="">
+          <div class="spotify-meta">
+            <div class="spotify-label">
+              <svg class="spotify-icon" viewBox="0 0 24 24" width="14" height="14" fill="#1db954" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm4.6 14.4a.6.6 0 01-.8.2c-2.3-1.4-5.1-1.7-8.5-.9a.6.6 0 11-.2-1.2c3.7-.8 6.9-.5 9.4 1.1a.6.6 0 01.1.8zm1.2-2.7a.8.8 0 01-1 .3c-2.6-1.6-6.5-2-9.5-1.1a.8.8 0 11-.5-1.5c3.5-1 7.8-.6 10.8 1.3a.8.8 0 01.2 1zm.1-2.8c-3.1-1.9-8.3-2-11.3-1.1a.9.9 0 11-.6-1.7c3.4-1 9.1-.9 12.6 1.3a.9.9 0 01-1 1.5z"/></svg>
+              LISTENING ON SPOTIFY
+            </div>
+            <div class="spotify-song" id="spotify-song"></div>
+            <div class="spotify-artist" id="spotify-artist"></div>
+            <div class="spotify-progress">
+              <div class="spotify-progress-bar" id="spotify-progress-bar"></div>
+            </div>
+            <div class="spotify-time">
+              <span id="spotify-current">0:00</span> / <span id="spotify-total">0:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TCG Collection ── -->
+      <div class="hobby-card hobby-card--full hobby-card--tcg">
+        <div class="hobby-card-head">
+          <span class="hobby-tag" style="background:var(--pink);">TCG</span>
+          <h3 class="hobby-title pixel">Colección de Cartas</h3>
+        </div>
+        <div class="tcg-grid">
+          <figure class="tcg-card">
+            <img src="cartas.jpg" alt="Eria the Water Charmer">
+            <figcaption>
+              <span class="tcg-name">Eria the Water Charmer</span>
+              <span class="tcg-rarity">★ Secret Rare</span>
+            </figcaption>
+          </figure>
+          <figure class="tcg-card">
+            <img src="cartas.jpg" alt="Blue-Eyes White Dragon">
+            <figcaption>
+              <span class="tcg-name">Blue-Eyes W. Dragon</span>
+              <span class="tcg-rarity">★★ Ultra Rare</span>
+            </figcaption>
+          </figure>
+          <figure class="tcg-card">
+            <img src="cartas.jpg" alt="Dark Magician">
+            <figcaption>
+              <span class="tcg-name">Dark Magician</span>
+              <span class="tcg-rarity">★ Rare</span>
+            </figcaption>
+          </figure>
+          <figure class="tcg-card">
+            <img src="cartas.jpg" alt="Winged Kuriboh">
+            <figcaption>
+              <span class="tcg-name">Winged Kuriboh</span>
+              <span class="tcg-rarity">Common · Foil</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- ── Backloggd carousel ── -->
+      <div class="hobby-card hobby-card--full hobby-card--backloggd">
+        <div class="hobby-card-head">
+          <span class="hobby-tag" style="background:var(--orange);">BACKLOGGD</span>
+          <h3 class="hobby-title pixel">Game Catalog</h3>
+          <a href="https://backloggd.com/u/EterSentry/" target="_blank" class="hobby-link backloggd-head-link">
+            &gt; Perfil →
+          </a>
+        </div>
+        <div class="backloggd-carousel">
+          <button class="carousel-nav prev" id="bl-prev" aria-label="Anterior">◀</button>
+          <div class="carousel-track" id="bl-track"></div>
+          <button class="carousel-nav next" id="bl-next" aria-label="Siguiente">▶</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer style="margin-top:60px; padding:30px 0; border-top: 1px dashed var(--border); text-align:center; font-family:var(--font-pixel); color:var(--text-dim);">
+    <p>END OF LOGS · <a href="index.html" style="color:var(--purple);">&lt; VOLVER AL ROOT</a></p>
+  </footer>
+
+</div><!-- /container -->
+
+<!-- ═══════════════ GAME PANEL MODAL ═══════════════ -->
+<div class="game-panel" id="game-panel" aria-hidden="true">
+  <div class="game-panel-box">
+    <button class="game-panel-close" id="gp-close" aria-label="Cerrar">✕</button>
+    <div class="game-panel-header">
+      <span class="game-panel-platform" id="gp-platform"></span>
+      <h3 class="game-panel-title pixel" id="gp-title"></h3>
+    </div>
+    <div class="game-panel-shots" id="gp-shots"></div>
+    <p class="game-panel-opinion" id="gp-opinion"></p>
+  </div>
+</div>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script>
+/* ---- INTERSECTION OBSERVER (scroll reveal) ---- */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.hobby-card').forEach(el => observer.observe(el));
+
+/* ---- STEAM WIDGET (carga condicional) ---- */
+const STEAM_ID64 = '76561198159428118';
+(function initSteamWidget() {
+  const container = document.getElementById('steam-widget');
+  if (!container || !/^\d{17}$/.test(STEAM_ID64)) return;
+  const img = new Image();
+  img.alt = 'Steam live status';
+  img.onload  = () => { container.innerHTML = ''; container.appendChild(img); };
+  img.onerror = () => {
+    container.innerHTML = '<span class="steam-fallback">⚠ Widget Steam no disponible<br>(¿perfil público?)</span>';
+  };
+  img.src = `https://steamsignature.com/status/english/${STEAM_ID64}.png`;
+})();
+
+/* ---- LANYARD · DISCORD LIVE STATUS + SPOTIFY ---- */
+const LANYARD_USER_ID = '213041224205074432';
+let spotifyRafId = null;
+let currentSpotify = null;
+
+async function pollLanyard() {
+  const stateEl    = document.getElementById('discord-state');
+  const nameEl     = document.getElementById('discord-name');
+  const avatarEl   = document.getElementById('discord-avatar');
+  const dotEl      = document.getElementById('discord-dot');
+  const customEl   = document.getElementById('discord-custom');
+  const activityEl = document.getElementById('discord-activity');
+  const spotifyPanel = document.getElementById('spotify-panel');
+
+  if (!/^\d{17,20}$/.test(LANYARD_USER_ID)) return;
+  try {
+    const res = await fetch(`https://api.lanyard.rest/v1/users/${LANYARD_USER_ID}`);
+    const json = await res.json();
+    if (!json.success) throw new Error(json.error?.message || 'lanyard error');
+    const d = json.data;
+    const hash = d.discord_user.avatar;
+    avatarEl.src = hash
+      ? `https://cdn.discordapp.com/avatars/${d.discord_user.id}/${hash}.${hash.startsWith('a_') ? 'gif' : 'png'}?size=128`
+      : `https://cdn.discordapp.com/embed/avatars/0.png`;
+    nameEl.textContent = d.discord_user.global_name || d.discord_user.username;
+
+    const map = {
+      online:  '> Conectado',
+      idle:    '> Ausente',
+      dnd:     '> No molestar',
+      offline: '> Desconectado',
+    };
+    stateEl.textContent = map[d.discord_status] || '> sin estado';
+    dotEl.dataset.status = d.discord_status;
+
+    // Custom status (activity type 4)
+    const custom = (d.activities || []).find(a => a.type === 4);
+    if (custom && (custom.state || custom.emoji)) {
+      const emoji = custom.emoji?.name || '💭';
+      customEl.textContent = `${emoji} ${custom.state || ''}`.trim();
+      customEl.hidden = false;
+    } else {
+      customEl.hidden = true;
+    }
+
+    // Playing (type 0)
+    const game = (d.activities || []).find(a => a.type === 0);
+    activityEl.textContent = game ? `🎮 ${game.name}` : '';
+
+    // Spotify
+    if (d.listening_to_spotify && d.spotify) {
+      currentSpotify = d.spotify;
+      renderSpotify(d.spotify);
+      spotifyPanel.hidden = false;
+      spotifyPanel.classList.add('active');
+    } else {
+      currentSpotify = null;
+      spotifyPanel.classList.remove('active');
+      spotifyPanel.hidden = true;
+      if (spotifyRafId) cancelAnimationFrame(spotifyRafId);
+    }
+  } catch (e) {
+    stateEl.textContent = '> Lanyard offline';
+    dotEl.dataset.status = 'offline';
+  }
+}
+
+function renderSpotify(s) {
+  document.getElementById('spotify-art').src = s.album_art_url || '';
+  document.getElementById('spotify-song').textContent   = s.song   || '';
+  document.getElementById('spotify-artist').textContent = s.artist || '';
+  if (spotifyRafId) cancelAnimationFrame(spotifyRafId);
+  const bar = document.getElementById('spotify-progress-bar');
+  const cur = document.getElementById('spotify-current');
+  const tot = document.getElementById('spotify-total');
+  const start = s.timestamps?.start || Date.now();
+  const end   = s.timestamps?.end   || start + 1;
+  const tick = () => {
+    if (!currentSpotify) return;
+    const now = Date.now();
+    const dur = end - start;
+    const pos = Math.max(0, Math.min(now - start, dur));
+    bar.style.width = `${(pos / dur) * 100}%`;
+    cur.textContent = fmtTime(pos);
+    tot.textContent = fmtTime(dur);
+    spotifyRafId = requestAnimationFrame(tick);
+  };
+  tick();
+}
+function fmtTime(ms) {
+  const s = Math.floor(ms / 1000);
+  const m = Math.floor(s / 60);
+  return `${m}:${String(s % 60).padStart(2, '0')}`;
+}
+pollLanyard();
+setInterval(pollLanyard, 15000);
+
+/* ---- BACKLOGGD CAROUSEL + GAME PANEL ---- */
+/* Portadas: si la URL de Wikipedia falla, el onerror cae al placeholder local */
+const BACKLOGGD_GAMES = [
+  {
+    id: 'totk',
+    title: 'Zelda: Tears of the Kingdom',
+    platform: 'SWITCH',
+    cover: 'https://upload.wikimedia.org/wikipedia/en/8/85/The_Legend_of_Zelda_Tears_of_the_Kingdom_cover.jpg',
+    screenshots: ['luffy.jpg', 'cartas.jpg'],
+    opinion: 'Una secuela monumental. El sistema de construcción me atrapó semanas enteras.',
+  },
+  {
+    id: 'metroid-prime',
+    title: 'Metroid Prime Remastered',
+    platform: 'SWITCH',
+    cover: 'https://upload.wikimedia.org/wikipedia/en/5/51/Metroid_Prime_Remastered_cover_art.jpg',
+    screenshots: ['luffy.jpg'],
+    opinion: 'El remaster perfecto. Controles renovados sin traicionar al original.',
+  },
+  {
+    id: 'pokemon-x',
+    title: 'Pokémon X',
+    platform: '3DS',
+    cover: 'https://upload.wikimedia.org/wikipedia/en/6/61/Pokemon_X_and_Y_EN_boxart.png',
+    screenshots: ['cartas.jpg'],
+    opinion: 'Mi primera entrada 3D. Kalos sigue siendo mi región favorita.',
+  },
+  {
+    id: 'fire-emblem',
+    title: 'Fire Emblem: Awakening',
+    platform: '3DS',
+    cover: 'https://upload.wikimedia.org/wikipedia/en/f/f2/Fire_Emblem_Awakening_box_artwork.png',
+    screenshots: ['luffy.jpg'],
+    opinion: 'Táctico, emotivo, adictivo. Horas grindeando supports.',
+  },
+  {
+    id: 'oot',
+    title: 'Ocarina of Time',
+    platform: 'N64',
+    cover: 'https://upload.wikimedia.org/wikipedia/en/5/57/The_Legend_of_Zelda_Ocarina_of_Time_box_art.jpg',
+    screenshots: ['cartas.jpg'],
+    opinion: 'Clásico atemporal. Lo rejuego cada 2 años.',
+  },
+  {
+    id: 'mario64',
+    title: 'Super Mario 64',
+    platform: 'N64',
+    cover: 'https://upload.wikimedia.org/wikipedia/en/9/96/Super_Mario_64_box_cover.jpg',
+    screenshots: ['luffy.jpg'],
+    opinion: 'La piedra angular del 3D platformer. Aún se siente moderno.',
+  },
+];
+
+(function initBackloggd() {
+  const track = document.getElementById('bl-track');
+  if (!track) return;
+
+  track.innerHTML = BACKLOGGD_GAMES.map(g => `
+    <button class="game-card" data-game-id="${g.id}" type="button">
+      <div class="game-cover">
+        <img src="${g.cover}" alt="${g.title} cover" loading="lazy"
+             onerror="this.onerror=null; this.src='cartas.jpg'; this.classList.add('is-fallback');">
+      </div>
+      <div class="game-card-meta">
+        <span class="game-card-title">${g.title}</span>
+        <span class="game-card-platform">${g.platform}</span>
+      </div>
+    </button>
+  `).join('');
+
+  const prev = document.getElementById('bl-prev');
+  const next = document.getElementById('bl-next');
+  const step = () => Math.max(220, track.clientWidth * 0.75);
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left:  step(), behavior: 'smooth' }));
+
+  track.addEventListener('click', (e) => {
+    const btn = e.target.closest('.game-card');
+    if (!btn) return;
+    const game = BACKLOGGD_GAMES.find(g => g.id === btn.dataset.gameId);
+    if (game) openGamePanel(game);
+  });
+
+  const panel = document.getElementById('game-panel');
+  document.getElementById('gp-close').addEventListener('click', closeGamePanel);
+  panel.addEventListener('click', (e) => { if (e.target === panel) closeGamePanel(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeGamePanel(); });
+})();
+
+function openGamePanel(game) {
+  document.getElementById('gp-title').textContent    = game.title;
+  document.getElementById('gp-platform').textContent = game.platform;
+  document.getElementById('gp-opinion').textContent  = game.opinion;
+  const shotsEl = document.getElementById('gp-shots');
+  shotsEl.innerHTML = (game.screenshots || [])
+    .map(s => `<img src="${s}" alt="${game.title} screenshot">`)
+    .join('');
+  const panel = document.getElementById('game-panel');
+  panel.classList.add('open');
+  panel.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function closeGamePanel() {
+  const panel = document.getElementById('game-panel');
+  panel.classList.remove('open');
+  panel.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+</script>
+
+</body>
+</html>
