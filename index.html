@@ -447,7 +447,7 @@
         <div class="hobby-card-head">
           <span class="hobby-tag" style="background:var(--orange);">BACKLOGGD</span>
           <h3 class="hobby-title pixel">Game Catalog</h3>
-          <a href="https://www.backloggd.com/u/TU_USUARIO_BACKLOGGD/" target="_blank" class="hobby-link backloggd-head-link">
+          <a href="https://backloggd.com/u/EterSentry/" target="_blank" class="hobby-link backloggd-head-link">
             &gt; Perfil →
           </a>
         </div>
@@ -489,6 +489,13 @@
             <div>
               <div>github.com/EtherSentry</div>
               <div class="contact-link-label">Repositorios & código</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/rodrigofrayre/" target="_blank" class="contact-link">
+            <span class="contact-link-icon">💼</span>
+            <div>
+              <div>linkedin.com/in/rodrigofrayre</div>
+              <div class="contact-link-label">Perfil profesional</div>
             </div>
           </a>
           <div class="contact-link" style="cursor:default;">
@@ -614,11 +621,12 @@ function sendContactForm() {
 }
 
 /* ---- STEAM WIDGET (carga condicional, sin <img> roto al inicio) ---- */
-const STEAM_ID64 = 'STEAM_0:0:99581195'; // <-- reemplaza con tu SteamID64 (17 dígitos) de https://steamid.io
+/* Necesitas tu SteamID64: 17 dígitos. Pega tu URL de perfil en https://steamid.io */
+const STEAM_ID64 = '76561198159428118';
 (function initSteamWidget() {
   const container = document.getElementById('steam-widget');
   if (!container) return;
-  if (!STEAM_ID64 || STEAM_ID64 === 'STEAM_0:0:99581195') return; // conserva fallback
+  if (!/^\d{17}$/.test(STEAM_ID64)) return; // sólo carga con formato válido
   const img = new Image();
   img.alt = 'Steam live status';
   img.onload  = () => { container.innerHTML = ''; container.appendChild(img); };
@@ -629,8 +637,12 @@ const STEAM_ID64 = 'STEAM_0:0:99581195'; // <-- reemplaza con tu SteamID64 (17 d
 })();
 
 /* ---- LANYARD · DISCORD LIVE STATUS ---- */
-/* Requisito: unirte al servidor https://discord.gg/lanyard con tu cuenta */
-const LANYARD_USER_ID = 'ethersentry'; // <-- 17-19 dígitos (Dev Mode → click derecho → Copy User ID)
+/* Requisitos:
+   1) Activa Modo Desarrollador en Discord → click derecho en tu avatar → Copiar ID de usuario
+      (es un número de 17-19 dígitos, NO tu username)
+   2) Únete al servidor https://discord.gg/lanyard con esa misma cuenta
+*/
+const LANYARD_USER_ID = ''; // <-- pega aquí tu ID numérico de Discord
 
 async function pollLanyard() {
   const stateEl    = document.getElementById('discord-state');
@@ -639,7 +651,7 @@ async function pollLanyard() {
   const dotEl      = document.getElementById('discord-dot');
   const activityEl = document.getElementById('discord-activity');
 
-  if (!LANYARD_USER_ID || LANYARD_USER_ID === 'ethersentry') return;
+  if (!/^\d{17,20}$/.test(LANYARD_USER_ID)) return; // necesita ID numérico válido
   try {
     const res = await fetch(`https://api.lanyard.rest/v1/users/${LANYARD_USER_ID}`);
     const json = await res.json();
