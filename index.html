@@ -614,11 +614,11 @@ function sendContactForm() {
 }
 
 /* ---- STEAM WIDGET (carga condicional, sin <img> roto al inicio) ---- */
-const STEAM_ID64 = 'TU_STEAMID64'; // <-- reemplaza con tu SteamID64 (17 dígitos) de https://steamid.io
+const STEAM_ID64 = 'STEAM_0:0:99581195'; // <-- reemplaza con tu SteamID64 (17 dígitos) de https://steamid.io
 (function initSteamWidget() {
   const container = document.getElementById('steam-widget');
   if (!container) return;
-  if (!STEAM_ID64 || STEAM_ID64 === 'TU_STEAMID64') return; // conserva fallback
+  if (!STEAM_ID64 || STEAM_ID64 === 'STEAM_0:0:99581195') return; // conserva fallback
   const img = new Image();
   img.alt = 'Steam live status';
   img.onload  = () => { container.innerHTML = ''; container.appendChild(img); };
@@ -630,7 +630,7 @@ const STEAM_ID64 = 'TU_STEAMID64'; // <-- reemplaza con tu SteamID64 (17 dígito
 
 /* ---- LANYARD · DISCORD LIVE STATUS ---- */
 /* Requisito: unirte al servidor https://discord.gg/lanyard con tu cuenta */
-const LANYARD_USER_ID = 'TU_DISCORD_USER_ID'; // <-- 17-19 dígitos (Dev Mode → click derecho → Copy User ID)
+const LANYARD_USER_ID = 'ethersentry'; // <-- 17-19 dígitos (Dev Mode → click derecho → Copy User ID)
 
 async function pollLanyard() {
   const stateEl    = document.getElementById('discord-state');
@@ -639,7 +639,7 @@ async function pollLanyard() {
   const dotEl      = document.getElementById('discord-dot');
   const activityEl = document.getElementById('discord-activity');
 
-  if (!LANYARD_USER_ID || LANYARD_USER_ID === 'TU_DISCORD_USER_ID') return;
+  if (!LANYARD_USER_ID || LANYARD_USER_ID === 'ethersentry') return;
   try {
     const res = await fetch(`https://api.lanyard.rest/v1/users/${LANYARD_USER_ID}`);
     const json = await res.json();
