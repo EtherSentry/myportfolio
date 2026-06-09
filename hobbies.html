@@ -57,7 +57,7 @@
         </div>
         <div class="nintendo-body">
           <div class="nintendo-avatar">
-            <img src="luffy.jpg" alt="Nintendo avatar">
+            <img src="luffy.webp" alt="Nintendo avatar" width="82" height="82" loading="lazy" decoding="async">
           </div>
           <div class="nintendo-info">
             <div class="nintendo-name">EtherSentry</div>
@@ -128,28 +128,28 @@
         </div>
         <div class="tcg-grid">
           <figure class="tcg-card">
-            <img src="cartas.jpg" alt="Eria the Water Charmer">
+            <img src="cartas.webp" alt="Eria the Water Charmer" loading="lazy" decoding="async">
             <figcaption>
               <span class="tcg-name">Eria the Water Charmer</span>
               <span class="tcg-rarity">★ Secret Rare</span>
             </figcaption>
           </figure>
           <figure class="tcg-card">
-            <img src="cartas.jpg" alt="Blue-Eyes White Dragon">
+            <img src="cartas.webp" alt="Blue-Eyes White Dragon" loading="lazy" decoding="async">
             <figcaption>
               <span class="tcg-name">Blue-Eyes W. Dragon</span>
               <span class="tcg-rarity">★★ Ultra Rare</span>
             </figcaption>
           </figure>
           <figure class="tcg-card">
-            <img src="cartas.jpg" alt="Dark Magician">
+            <img src="cartas.webp" alt="Dark Magician" loading="lazy" decoding="async">
             <figcaption>
               <span class="tcg-name">Dark Magician</span>
               <span class="tcg-rarity">★ Rare</span>
             </figcaption>
           </figure>
           <figure class="tcg-card">
-            <img src="cartas.jpg" alt="Winged Kuriboh">
+            <img src="cartas.webp" alt="Winged Kuriboh" loading="lazy" decoding="async">
             <figcaption>
               <span class="tcg-name">Winged Kuriboh</span>
               <span class="tcg-rarity">Common · Foil</span>
@@ -325,7 +325,7 @@ const BACKLOGGD_GAMES = [
     title: 'Zelda: Tears of the Kingdom',
     platform: 'SWITCH',
     cover: 'https://upload.wikimedia.org/wikipedia/en/8/85/The_Legend_of_Zelda_Tears_of_the_Kingdom_cover.jpg',
-    screenshots: ['luffy.jpg', 'cartas.jpg'],
+    screenshots: ['luffy.webp', 'cartas.webp'],
     opinion: 'Una secuela monumental. El sistema de construcción me atrapó semanas enteras.',
   },
   {
@@ -333,7 +333,7 @@ const BACKLOGGD_GAMES = [
     title: 'Metroid Prime Remastered',
     platform: 'SWITCH',
     cover: 'https://upload.wikimedia.org/wikipedia/en/5/51/Metroid_Prime_Remastered_cover_art.jpg',
-    screenshots: ['luffy.jpg'],
+    screenshots: ['luffy.webp'],
     opinion: 'El remaster perfecto. Controles renovados sin traicionar al original.',
   },
   {
@@ -341,7 +341,7 @@ const BACKLOGGD_GAMES = [
     title: 'Pokémon X',
     platform: '3DS',
     cover: 'https://upload.wikimedia.org/wikipedia/en/6/61/Pokemon_X_and_Y_EN_boxart.png',
-    screenshots: ['cartas.jpg'],
+    screenshots: ['cartas.webp'],
     opinion: 'Mi primera entrada 3D. Kalos sigue siendo mi región favorita.',
   },
   {
@@ -349,7 +349,7 @@ const BACKLOGGD_GAMES = [
     title: 'Fire Emblem: Awakening',
     platform: '3DS',
     cover: 'https://upload.wikimedia.org/wikipedia/en/f/f2/Fire_Emblem_Awakening_box_artwork.png',
-    screenshots: ['luffy.jpg'],
+    screenshots: ['luffy.webp'],
     opinion: 'Táctico, emotivo, adictivo. Horas grindeando supports.',
   },
   {
@@ -357,7 +357,7 @@ const BACKLOGGD_GAMES = [
     title: 'Ocarina of Time',
     platform: 'N64',
     cover: 'https://upload.wikimedia.org/wikipedia/en/5/57/The_Legend_of_Zelda_Ocarina_of_Time_box_art.jpg',
-    screenshots: ['cartas.jpg'],
+    screenshots: ['cartas.webp'],
     opinion: 'Clásico atemporal. Lo rejuego cada 2 años.',
   },
   {
@@ -365,7 +365,7 @@ const BACKLOGGD_GAMES = [
     title: 'Super Mario 64',
     platform: 'N64',
     cover: 'https://upload.wikimedia.org/wikipedia/en/9/96/Super_Mario_64_box_cover.jpg',
-    screenshots: ['luffy.jpg'],
+    screenshots: ['luffy.webp'],
     opinion: 'La piedra angular del 3D platformer. Aún se siente moderno.',
   },
 ];
@@ -378,7 +378,7 @@ const BACKLOGGD_GAMES = [
     <button class="game-card" data-game-id="${g.id}" type="button">
       <div class="game-cover">
         <img src="${g.cover}" alt="${g.title} cover" loading="lazy"
-             onerror="this.onerror=null; this.src='cartas.jpg'; this.classList.add('is-fallback');">
+             onerror="this.onerror=null; this.src='cartas.webp'; this.classList.add('is-fallback');">
       </div>
       <div class="game-card-meta">
         <span class="game-card-title">${g.title}</span>
