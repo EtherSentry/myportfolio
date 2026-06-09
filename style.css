@@ -3,7 +3,7 @@
    Paleta: Dracula Theme  |  Fuentes: VT323 + Space Mono
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+/* Las fuentes se cargan vía <link> en el HTML (evita @import render-blocking) */
 
 /* --- VARIABLES --- */
 :root {
@@ -316,6 +316,104 @@ body::after {
 
 /* --- TÍTULOS DE SECCIÓN --- */
 section { padding: 80px 0; }
+
+/* --- STATS STRIP (status bar) --- */
+section.stats-strip { padding: 36px 0; }
+.stats-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+}
+.stat-chip {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--green);
+  padding: 18px 16px 14px;
+  text-align: center;
+  transition: all 0.25s;
+}
+.stat-chip:hover {
+  border-color: var(--green);
+  box-shadow: var(--glow-green);
+  transform: translateY(-3px);
+}
+.stat-chip:nth-child(2) { border-top-color: var(--purple); }
+.stat-chip:nth-child(2):hover { border-color: var(--purple); box-shadow: var(--glow-purple); }
+.stat-chip:nth-child(3) { border-top-color: var(--cyan); }
+.stat-chip:nth-child(3):hover { border-color: var(--cyan); box-shadow: var(--glow-cyan); }
+.stat-chip:nth-child(4) { border-top-color: var(--orange); }
+.stat-chip:nth-child(4):hover { border-color: var(--orange); box-shadow: 0 0 20px rgba(255,184,108,0.4); }
+.stat-num {
+  display: block;
+  font-family: var(--font-pixel);
+  font-size: 2.4rem;
+  color: var(--text-main);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-desc {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* --- FETCH CARD (terminal fastfetch) --- */
+.fetch-card {
+  background: #0a0a12;
+  border: 1px solid var(--border);
+  max-width: 760px;
+  margin: 0 auto;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.5);
+}
+.fetch-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+.fetch-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+.fetch-dot--r { background: var(--pink); }
+.fetch-dot--y { background: var(--yellow); }
+.fetch-dot--g { background: var(--green); }
+.fetch-titlebar span:last-child { margin-left: 8px; }
+.fetch-body {
+  display: flex;
+  gap: 32px;
+  padding: 24px 28px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.fetch-art {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.25;
+  color: var(--cyan);
+  text-shadow: 0 0 8px rgba(139,233,253,0.35);
+  margin: 0;
+  flex-shrink: 0;
+}
+.fetch-lines {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 2;
+  min-width: 0;
+}
+.fetch-lines .fk { color: var(--purple); font-weight: 700; }
+.fetch-lines .fv { color: var(--text-main); }
+.fetch-prompt { color: var(--green); }
+.fetch-colors { display: flex; gap: 0; margin-top: 10px; }
+.fetch-colors i {
+  width: 22px;
+  height: 12px;
+  display: inline-block;
+}
 
 .section-header {
   margin-bottom: 50px;
@@ -1282,4 +1380,20 @@ footer .footer-cta { font-size: 1.8rem; color: var(--text-main); margin-bottom: 
   .masonry-grid { columns: 1; }
   .hero h1 { font-size: 2.8rem; }
   .nav-links a { padding: 4px 6px; font-size: 0.65rem; }
+  .fetch-body { gap: 18px; padding: 18px 16px; }
+  .fetch-art { font-size: 0.65rem; }
+}
+
+/* ============================================================
+   ACCESIBILIDAD / RENDIMIENTO — Movimiento reducido
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  body::after { display: none; }   /* scanline */
+  .pixel-sprite { display: none; } /* sprite corredor */
 }
